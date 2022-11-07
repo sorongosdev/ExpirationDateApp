@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "468401620558",
+    "project_id": "expirationdateapp-d69e9",
+    "storage_bucket": "expirationdateapp-d69e9.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:468401620558:android:e75f223a9413874c69651f",
+        "android_client_info": {
+          "package_name": "com.example.expirationdateapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "468401620558-qccq0gv9uto4hvlqn9tnrd4jeumn4b6a.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC2inf1qeg5xAUDoEknhBHjhhXOiX66or8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "468401620558-qccq0gv9uto4hvlqn9tnrd4jeumn4b6a.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
