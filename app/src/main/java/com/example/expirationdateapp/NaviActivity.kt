@@ -18,23 +18,11 @@ class NaviActivity : AppCompatActivity() {
         navigationItemSelect()
     }
 
-//    private fun setFragment(fragment: Fragment) {
-//        val fragmentTransaction: FragmentTransaction = supportFragmentManager.beginTransaction()
-//        fragmentTransaction.replace(R.id.mainFrameLayout, fragment)
-//        fragmentTransaction.commit()
-//    }
     private fun replaceFragment(fragment: Fragment) {
         supportFragmentManager.beginTransaction()
             .replace(R.id.mainFrameLayout, fragment)
             .commit()
     }
-
-//    fun addFragment(fragment: Fragment) {
-//        supportFragmentManager.beginTransaction()
-//            .add(R.id.mainFrameLayout, fragment)
-//            .addToBackStack(null)
-//            .commit()
-//    }
 
     private fun navigationItemSelect() {
         binding.navigationView.run {
