@@ -7,9 +7,14 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
 import com.example.expirationdateapp.databinding.ActivityNaviBinding
+import com.google.firebase.firestore.FirebaseFirestore
 
 class NaviActivity : AppCompatActivity() {
     private lateinit var binding: ActivityNaviBinding
+    val db = FirebaseFirestore.getInstance()    // Firestore 인스턴스 선언
+    val itemList = arrayListOf<ListLayout>()    // 리스트 아이템 배열
+    val adapter = ListAdapter(itemList)         // 리사이클러 뷰 어댑터
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityNaviBinding.inflate(layoutInflater)
@@ -37,4 +42,6 @@ class NaviActivity : AppCompatActivity() {
             selectedItemId = R.id.homeFragment
         }
     }
+
+
 }
