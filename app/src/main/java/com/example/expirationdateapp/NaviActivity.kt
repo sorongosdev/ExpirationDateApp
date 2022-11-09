@@ -39,7 +39,7 @@ class NaviActivity : AppCompatActivity() {
                 }
                 true
             }
-            selectedItemId = R.id.homeFragment
+            selectedItemId = R.id.searchFragment
         }
     }
 
