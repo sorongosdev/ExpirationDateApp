@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+    <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".home.ItemAdd">
+
+        <LinearLayout
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingLeft="16dp"
+            android:paddingRight="16dp"
+            android:orientation="vertical">
+
+            <EditText
+                android:id="@+id/item_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="이름 입력"
+                 />
+            <EditText
+                android:id="@+id/item_registerDate"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="등록일"
+                android:inputType="date"
+                />
+            <EditText
+                android:id="@+id/item_expire"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="소비기한"
+                android:inputType="date"
+                />
+            <Button
+                android:id="@+id/item_register"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="등록"
+                />
+        </LinearLayout>
+    </FrameLayout>
+</layout>

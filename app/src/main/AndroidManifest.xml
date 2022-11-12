@@ -14,7 +14,7 @@
         android:theme="@style/Theme.ExpirationDateApp"
         tools:targetApi="31">
         <activity
-            android:name=".NaviActivity"
+            android:name=".home.NaviActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

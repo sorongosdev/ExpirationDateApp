@@ -7,9 +7,10 @@
         <entry key="..\:/Users/Admin/AndroidStudioProjects/ExpirationDateApp/app/src/main/res/drawable/ic_search.xml" value="0.1575" />
         <entry key="..\:/Users/Admin/AndroidStudioProjects/ExpirationDateApp/app/src/main/res/drawable/menu_click_color.xml" value="0.1575" />
         <entry key="..\:/Users/Admin/AndroidStudioProjects/ExpirationDateApp/app/src/main/res/layout/activity_main.xml" value="0.24947916666666667" />
-        <entry key="..\:/Users/Admin/AndroidStudioProjects/ExpirationDateApp/app/src/main/res/layout/activity_navi.xml" value="0.23489583333333333" />
+        <entry key="..\:/Users/Admin/AndroidStudioProjects/ExpirationDateApp/app/src/main/res/layout/activity_navi.xml" value="0.1" />
         <entry key="..\:/Users/Admin/AndroidStudioProjects/ExpirationDateApp/app/src/main/res/layout/fragment_calender.xml" value="0.23489583333333333" />
-        <entry key="..\:/Users/Admin/AndroidStudioProjects/ExpirationDateApp/app/src/main/res/layout/fragment_home.xml" value="0.264" />
+        <entry key="..\:/Users/Admin/AndroidStudioProjects/ExpirationDateApp/app/src/main/res/layout/fragment_home.xml" value="0.1" />
+        <entry key="..\:/Users/Admin/AndroidStudioProjects/ExpirationDateApp/app/src/main/res/layout/fragment_item_add.xml" value="0.2734375" />
         <entry key="..\:/Users/Admin/AndroidStudioProjects/ExpirationDateApp/app/src/main/res/layout/fragment_search.xml" value="0.24947916666666667" />
         <entry key="..\:/Users/Admin/AndroidStudioProjects/ExpirationDateApp/app/src/main/res/layout/list_layout.xml" value="0.24947916666666667" />
         <entry key="..\:/Users/Admin/AndroidStudioProjects/ExpirationDateApp/app/src/main/res/menu/navi_menu.xml" value="0.24947916666666667" />
