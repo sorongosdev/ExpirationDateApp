@@ -1,5 +1,6 @@
 package com.example.expirationdateapp.home
 
+import android.content.ContentValues.TAG
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -16,16 +17,14 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.expirationdateapp.R
 import com.example.expirationdateapp.databinding.FragmentHomeBinding
-import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.*
+import org.w3c.dom.Document
 
 class Home : Fragment() {
     private lateinit var binding: FragmentHomeBinding
     val db = FirebaseFirestore.getInstance()
     val itemList = arrayListOf<ListLayout>()
     val adapter = ListAdapter(itemList)
-    // fragment 안에서 fragment manager 사용하기 위해 parentFragmentManger 사용
-//    val navHostFragment = childFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
-//    val navController = navHostFragment.navController
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
@@ -45,19 +44,20 @@ class Home : Fragment() {
         //Firestore Read, collection이름으로 field의 name 요소 불러오기
         db.collection("player").get()   // 작업할 컬렉션에서 문서 가져오기
             .addOnSuccessListener { result ->
-                // 성공할 경우`
-                for (document in result) {  // 가져온 문서들은 result에 들어감
-                    val item = ListLayout(document["name"] as String, document["useby"] as String)
-                    itemList.add(item) // 있는 것을 매번 다 가져오고 있음
+                //firestore write
+                for (doc in result) {  // 가져온 문서들은 result에 들어감
+                    val item = ListLayout(doc["name"] as String, doc["useby"] as String)
+                    itemList.add(item)
                 }
-//                adapter.notifyDataSetChanged()  // 전체 리사이클러뷰 갱신
+                adapter.notifyDataSetChanged()
             }
-            .addOnFailureListener { exception ->
-                Log.w("Home", "Error getting documents: $exception")    // 실패할 경우
-            }
-        // Firestore snapshot으로 불러오기
-//        db.collection("player").get().
 
         return binding.root
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        Log.d(TAG, "onDestroyView")
+        itemList.clear()
     }
 }

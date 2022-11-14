@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.expirationdateapp.R
 import com.example.expirationdateapp.databinding.FragmentItemAddBinding
@@ -36,6 +37,8 @@ class ItemAdd : Fragment() {
                 .addOnFailureListener { exception ->
                     Log.w("ItemAdd", "Error setting documents: $exception")    // 실패할 경우
                 }
+            val navController = findNavController()
+            navController.popBackStack()
         }
 
         return binding.root
