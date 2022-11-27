@@ -26,6 +26,6 @@ class NaviActivity : AppCompatActivity() {
         binding.navigationView.setupWithNavController(navController)
 
 //        // viewmodel
-//        viewModel.reload()
+//        viewModel.getList()
     }
 }
