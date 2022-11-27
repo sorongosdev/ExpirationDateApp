@@ -20,16 +20,15 @@ class Home : Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
+        Log.d("Home","onCreateView")
+
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_home,container,false)
+        binding.lifecycleOwner =viewLifecycleOwner
 
         //recycer view and adapter
         binding.rvList.apply{
             layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
-            adapter =
-                ListAdapter(
-                    layoutInflater,
-                    emptyList()
-                )
+            adapter = ListAdapter(emptyList())
         }
 
         //viewmodel
