@@ -51,11 +51,15 @@ class MainViewModel(): ViewModel() {
     fun addItem(itemName: String, itemList: ListLayout) {
         db.collection("player").document(itemName).set(itemList) // 실제 파이어베이스에 입력
             .addOnFailureListener { exception ->
-                Log.w("ItemAdd", "Error setting documents: $exception")    // 실패할 경우
+                Log.d("MainViewModel", "Error set documents: $exception")    // 실패할 경우
             }
     }
 
-    fun deleteItem(){
+    fun deleteItem(itemName: String){
+        db.collection("player").document(itemName).delete() // 실제 파이어베이스에 입력
+            .addOnFailureListener { exception ->
+                Log.d("MainViewModel", "Error delete documents: $exception")    // 실패할 경우
+            }
 
     }
 }

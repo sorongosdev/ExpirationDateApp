@@ -14,21 +14,21 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.expirationdateapp.R
 import com.example.expirationdateapp.databinding.FragmentHomeBinding
 
-class Home : Fragment() {
+class Home : Fragment(), DeleteItemClick{
+//class Home : Fragment(){
     private lateinit var binding: FragmentHomeBinding
     lateinit var model: MainViewModel
+    private val listener = this
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
-        Log.d("Home","onCreateView")
-
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_home,container,false)
         binding.lifecycleOwner =viewLifecycleOwner
 
         //recycer view and adapter
         binding.rvList.apply{
             layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
-            adapter = ListAdapter(emptyList())
+            adapter = ListAdapter(emptyList(),listener)
         }
 
         //viewmodel
@@ -45,6 +45,10 @@ class Home : Fragment() {
         }
 
         return binding.root
+    }
+
+    override fun deleteItemCall(ItemName: String){
+        model.deleteItem(ItemName) // name만 넘겨줘야함
     }
 
     override fun onDestroyView() {
