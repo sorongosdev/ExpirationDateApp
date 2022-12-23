@@ -26,8 +26,8 @@
     <fragment
         android:label="fragment_basket"
         android:id="@+id/basketFragment"
-        android:name="com.example.expirationdateapp.basket.SearchFragment"
-        tools:layout="@layout/fragment_search"
+        android:name="com.example.expirationdateapp.basket.BasketFragment"
+        tools:layout="@layout/fragment_basket"
         />
 
     <fragment

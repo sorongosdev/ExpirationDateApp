@@ -10,8 +10,6 @@ import com.example.expirationdateapp.R
 import com.google.firebase.firestore.DocumentSnapshot
 
 class ListAdapter (var itemList: List<DocumentSnapshot>, listener: DeleteItemClick):
-//class ListAdapter (var itemList: List<DocumentSnapshot>):
-
     RecyclerView.Adapter<ListAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {

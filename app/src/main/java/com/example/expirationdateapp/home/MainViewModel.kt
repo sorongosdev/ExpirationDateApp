@@ -18,6 +18,7 @@ class MainViewModel: ViewModel() {
     private val db = FirebaseFirestore.getInstance()
     lateinit var listenerBasic: ListenerRegistration
     val liveItemListData = MutableLiveData<List<DocumentSnapshot>>()
+    val liveBasketListData = MutableLiveData<List<DocumentSnapshot>>()
     val player = db.collection("player")
     lateinit var dataStr :String
 
@@ -25,22 +26,11 @@ class MainViewModel: ViewModel() {
     var liveTodayData = MutableLiveData<String>()
 
     init {
-//        reload()
         getList()
         getTime()
     }
 
-//    fun reload() {
-//        db.collection("player").get()   // 작업할 컬렉션에서 문서 가져오기
-//            .addOnSuccessListener { result ->
-//                //firestore write
-//                for (doc in result) {  // 가져온 문서들은 result에 들어감
-//                    LiveItemListData.value = ListLayout(doc["name"] as String, doc["useby"] as String)
-//                }
-//            }
-//    }
-
-    //snapshot read
+    /**snapshot read*/
     fun getList() {
         listenerBasic = player.orderBy("name")
             .addSnapshotListener { snapshot, e ->
@@ -48,8 +38,10 @@ class MainViewModel: ViewModel() {
                     Log.d(TAG, "User VM not listening")
                 }
                 if (snapshot != null) {
-                    for (doc in snapshot) {
+                    for (doc in snapshot) {                        
                         liveItemListData.value = snapshot.documents
+                        /**장바구니 리스트 업데이트*/
+                        if (doc.data["take"]==true) liveBasketListData.value = snapshot.documents
                     }
                 }
             }
@@ -76,7 +68,6 @@ class MainViewModel: ViewModel() {
                 if (task.isSuccessful) {
                     for (document in task.result!!) {
                         Log.d(TAG, document.id + " => " + document.data)
-//                        document.reference.update("dday",FieldValue.increment(-1))
                         document.reference.update("dday",calDday(document.data["useby"].toString(),liveTodayData.value))
                         Log.d(TAG,"dday updated")
                     }
