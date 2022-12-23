@@ -10,29 +10,32 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.expirationdateapp.R
 import com.example.expirationdateapp.databinding.FragmentBasketBinding
-import com.example.expirationdateapp.basket.ListAdapter
 import com.example.expirationdateapp.home.MainViewModel
 
 class BasketFragment : Fragment() {
     private lateinit var binding: FragmentBasketBinding
-    val model = ViewModelProvider(requireActivity()).get(MainViewModel::class.java)
+    lateinit var model: MainViewModel
+    private lateinit var items: MutableList<BasketListLayout>
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_basket,container,false)
         binding.lifecycleOwner =viewLifecycleOwner
 
+        model = ViewModelProvider(requireActivity()).get(MainViewModel::class.java)
         // take=true이면 갖고 온다
-        /**recycer view and adapter*/
-        binding.basketRv.apply{
-            layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
-            adapter = ListAdapter(emptyList())
+
+        model.liveBasketListData.observe(viewLifecycleOwner){
+            items.add(BasketListLayout(it))
         }
 
+        /**recycer view and adapter*/
+        binding.basketRv.adapter = BasketListAdapter(this.context, items)
+
         /**리스트뷰 업데이트*/
-        model.liveBasketListData.observe(viewLifecycleOwner){
-            (binding.basketRv.adapter as ListAdapter).setData(it)
-        }
+//        model.liveBasketListData.observe(viewLifecycleOwner){
+//            (binding.basketRv.adapter as BasketListAdapter).setData(it)
+//        }
 
         return binding.root
     }

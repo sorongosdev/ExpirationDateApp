@@ -30,12 +30,20 @@
                 />
 
             <TextView
-                android:id="@+id/deDay"
+                android:id="@+id/dDay"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:gravity="right"
-                android:text="D-13"
+                android:text="D-0"
                 android:textSize="30dp"
+                app:layout_constraintEnd_toStartOf="@+id/btn_delete_item"
+                />
+            <Button
+                android:id="@+id/btn_take_item"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="장바구니"
+                app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/btn_delete_item"
                 />
             <Button
@@ -46,6 +54,7 @@
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 />
+
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </androidx.cardview.widget.CardView>

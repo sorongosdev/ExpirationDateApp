@@ -5,6 +5,8 @@ import android.util.Log
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.example.expirationdateapp.basket.BasketListAdapter
+import com.example.expirationdateapp.basket.BasketListLayout
 import com.google.android.datatransport.runtime.util.PriorityMapping.toInt
 import com.google.android.gms.tasks.OnCompleteListener
 import com.google.common.primitives.UnsignedBytes.toInt
@@ -18,7 +20,8 @@ class MainViewModel: ViewModel() {
     private val db = FirebaseFirestore.getInstance()
     lateinit var listenerBasic: ListenerRegistration
     val liveItemListData = MutableLiveData<List<DocumentSnapshot>>()
-    val liveBasketListData = MutableLiveData<List<DocumentSnapshot>>()
+//    val liveBasketListData = MutableLiveData<List<DocumentSnapshot>>()
+    val liveBasketListData = MutableLiveData<String>()
     val player = db.collection("player")
     lateinit var dataStr :String
 
@@ -40,8 +43,13 @@ class MainViewModel: ViewModel() {
                 if (snapshot != null) {
                     for (doc in snapshot) {                        
                         liveItemListData.value = snapshot.documents
+                        Log.d("liveItemListData","${doc.id} => ${snapshot.documents}")
+
                         /**장바구니 리스트 업데이트*/
-                        if (doc.data["take"]==true) liveBasketListData.value = snapshot.documents
+                        if (doc.data["take"].toString()=="true"){
+                            Log.d("liveBasketListData","${doc.id} => ${doc.data["take"]}")
+                            liveBasketListData.value = doc.data["name"].toString()
+                        }
                     }
                 }
             }
@@ -77,9 +85,14 @@ class MainViewModel: ViewModel() {
             }
     }
 
+//    model.addItem(aItemName,ListLayout(aItemName,aItemExpire,aItemDday))
+
+
     /**장바구니에 들어가는 아이템 take필드를 true로 셋*/
     fun takeItem(itemName: String){
         player.document(itemName).update("take",true)
+//        /**장바구니 리스트 업데이트*/
+
     }
 
     fun Date2String(date: Int): String{
