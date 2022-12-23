@@ -26,9 +26,13 @@ class ListAdapter (var itemList: List<DocumentSnapshot>, listener: DeleteItemCli
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.name.text = itemList[position].getString("name")
         holder.useby.text = itemList[position].getString("useby")
+        holder.dDay.text = itemList[position].getLong("dday").toString()
         holder.btnDelete.setOnClickListener {
             //db 삭제
             mCallback.deleteItemCall(holder.name.text as String)
+        }
+        holder.btnTake.setOnClickListener {
+            mCallback.takeItemCall(holder.name.text as String)
         }
     }
     private val mCallback = listener
@@ -36,7 +40,9 @@ class ListAdapter (var itemList: List<DocumentSnapshot>, listener: DeleteItemCli
     class ViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
         val name: TextView = itemView.findViewById(R.id.search_name)
         val useby: TextView = itemView.findViewById(R.id.search_useby)
+        val dDay: TextView = itemView.findViewById(R.id.dDay)
         val btnDelete: Button = itemView.findViewById(R.id.btn_delete_item)
+        val btnTake: Button = itemView.findViewById(R.id.btn_take_item)
     }
 
     fun setData(new : List<DocumentSnapshot>){
