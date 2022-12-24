@@ -10,7 +10,7 @@
     <fragment
         android:label="fragment_home"
         android:id="@+id/homeFragment"
-        android:name="com.example.expirationdateapp.home.Home"
+        android:name="com.example.expirationdateapp.home.HomeFragment"
         tools:layout="@layout/fragment_home"
         >
         <action

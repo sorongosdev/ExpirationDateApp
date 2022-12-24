@@ -1,27 +1,27 @@
 package com.example.expirationdateapp.home
 import android.content.ContentValues.TAG
-import android.os.Build
 import android.util.Log
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.expirationdateapp.basket.BasketListAdapter
 import com.example.expirationdateapp.basket.BasketListLayout
-import com.google.android.datatransport.runtime.util.PriorityMapping.toInt
-import com.google.android.gms.tasks.OnCompleteListener
-import com.google.common.primitives.UnsignedBytes.toInt
 import com.google.firebase.firestore.*
-import java.lang.reflect.Field
 import java.text.SimpleDateFormat
-import java.time.LocalDate
 import java.util.*
 
 class MainViewModel: ViewModel() {
     private val db = FirebaseFirestore.getInstance()
     lateinit var listenerBasic: ListenerRegistration
     val liveItemListData = MutableLiveData<List<DocumentSnapshot>>()
+
 //    val liveBasketListData = MutableLiveData<List<DocumentSnapshot>>()
-    val liveBasketListData = MutableLiveData<String>()
+    val liveBasketListData = MutableLiveData<List<BasketListLayout>>()
+    lateinit var BasketList : MutableList<BasketListLayout> // can append
+//    val liveBasketListData = MutableLiveData<BasketListLayout>()
+//    var liveBasketItemData = MutableLiveData<BasketListLayout>()
+//    var liveBasketItemData = MutableLiveData<String>()
+
     val player = db.collection("player")
     lateinit var dataStr :String
 
@@ -29,28 +29,40 @@ class MainViewModel: ViewModel() {
     var liveTodayData = MutableLiveData<String>()
 
     init {
+        Log.d("mainViewModel","init")
         getList()
         getTime()
     }
 
     /**snapshot read*/
     fun getList() {
+        BasketList = mutableListOf<BasketListLayout>()
         listenerBasic = player.orderBy("name")
             .addSnapshotListener { snapshot, e ->
                 if (e != null) {
                     Log.d(TAG, "User VM not listening")
                 }
                 if (snapshot != null) {
-                    for (doc in snapshot) {                        
+                    for (doc in snapshot) {
                         liveItemListData.value = snapshot.documents
-                        Log.d("liveItemListData","${doc.id} => ${snapshot.documents}")
 
                         /**장바구니 리스트 업데이트*/
-                        if (doc.data["take"].toString()=="true"){
-                            Log.d("liveBasketListData","${doc.id} => ${doc.data["take"]}")
-                            liveBasketListData.value = doc.data["name"].toString()
+                        if (doc["take"] == true) {
+                            Log.d("liveBasketListData","${doc.id} => ${doc["take"]}")
+                            BasketList.add(BasketListLayout(doc.id))
+//                            BasketList = BasketList + BasketListLayout(doc.id)
+//                            liveBasketItemData.value = BasketListLayout(doc.id)
+//                            val liveBasketListData = MutableLiveData<List<BasketListLayout>>()
+//                            liveBasketListData.value = mutableListOf(BasketListLayout(doc.id))
+//                            liveBasketListData.value.addAll(mutableListOf(BasketListLayout(doc.id)))
+//                            liveBasketItemData.value = BasketListLayout(doc.id)
+//                            Log.d("liveBasketItemData","updated, ${liveBasketItemData.value}")
+                            Log.d("liveBasketListData","updated, ${BasketList}")
                         }
                     }
+                    Log.d("MainViewModel getList","for ended")
+                     // 리스트 개수 하나를 변화로 인식?
+                    liveBasketListData.value = BasketList
                 }
             }
     }
@@ -75,9 +87,7 @@ class MainViewModel: ViewModel() {
             .addOnCompleteListener{ task ->
                 if (task.isSuccessful) {
                     for (document in task.result!!) {
-                        Log.d(TAG, document.id + " => " + document.data)
                         document.reference.update("dday",calDday(document.data["useby"].toString(),liveTodayData.value))
-                        Log.d(TAG,"dday updated")
                     }
                 } else {
                     Log.w(TAG, "Error getting documents.", task.exception)
@@ -85,14 +95,11 @@ class MainViewModel: ViewModel() {
             }
     }
 
-//    model.addItem(aItemName,ListLayout(aItemName,aItemExpire,aItemDday))
-
-
     /**장바구니에 들어가는 아이템 take필드를 true로 셋*/
-    fun takeItem(itemName: String){
-        player.document(itemName).update("take",true)
-//        /**장바구니 리스트 업데이트*/
-
+    fun takeItem(itemName: String) {
+        player.document(itemName).update("take", true)
+//        liveBasketItemData.value = BasketListLayout(player.document(itemName).toString())
+//        Log.d("takeItem","${player.document(itemName).get()}")
     }
 
     fun Date2String(date: Int): String{

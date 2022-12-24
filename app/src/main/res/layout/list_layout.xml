@@ -36,7 +36,7 @@
                 android:gravity="right"
                 android:text="D-0"
                 android:textSize="30dp"
-                app:layout_constraintEnd_toStartOf="@+id/btn_delete_item"
+                app:layout_constraintEnd_toStartOf="@+id/btn_take_item"
                 />
             <Button
                 android:id="@+id/btn_take_item"

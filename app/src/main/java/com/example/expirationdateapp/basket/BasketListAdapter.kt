@@ -1,10 +1,12 @@
 package com.example.expirationdateapp.basket
 
 import android.content.Context
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.BaseAdapter
+import android.widget.Button
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.expirationdateapp.R
@@ -12,29 +14,32 @@ import com.example.expirationdateapp.databinding.BasketListLayoutBinding
 import com.example.expirationdateapp.home.ListLayout
 import com.google.firebase.firestore.DocumentSnapshot
 
-class BasketListAdapter(private val context: Context?, private var basketList: MutableList<BasketListLayout>) : BaseAdapter(){
+class BasketListAdapter(var basketList: List<BasketListLayout>):
 
-    override fun getCount(): Int = basketList.size
+    RecyclerView.Adapter<BasketListAdapter.ViewHolder>() {
 
-    override fun getItem(position: Int): BasketListLayout = basketList[position]
+        override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
+            val binding = LayoutInflater.from(parent.context).inflate(R.layout.basket_list_layout, parent, false)
+            return ViewHolder(binding)
+        }
 
-    override fun getItemId(position: Int): Long = position.toLong()
+        override fun getItemCount(): Int {
+            Log.d("basket_getItemCount","${basketList.size}")
+            return basketList.size
+        }
 
-    override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View {
-        val binding = BasketListLayoutBinding.inflate(LayoutInflater.from(context))
+        override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+            holder.name.text = basketList[position].itemName
+        }
 
-        val show = basketList[position]
-//        binding.mlImgTitle.setImageResource(resourceId)
-//        binding.mlTxtTitle.text = show.title
-//        binding.mlTxtSubtitle.text = show.subTitle
-        binding.itemName.text = show.itemName
+        class ViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
+            val name: TextView = itemView.findViewById(R.id.basket_item_name)
+        }
 
-        return binding.root
-
+        fun setData(new : List<BasketListLayout>){
+//            basketList = basketList+new
+            basketList = new
+            notifyDataSetChanged()
+            Log.d("basket_getItemCount","$new")
+        }
     }
-
-    fun setData(new : MutableList<BasketListLayout>){
-        basketList = new
-        notifyDataSetChanged()
-    }
-}

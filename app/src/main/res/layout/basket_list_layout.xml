@@ -11,21 +11,21 @@
             >
 
             <CheckBox
-                android:id="@+id/checkbox"
+                android:id="@+id/basket_checkbox"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 />
             <TextView
-                android:id="@+id/item_name"
+                android:id="@+id/basket_item_name"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:text="음식 이름"
                 android:textStyle="bold"
-                app:layout_constraintStart_toEndOf="@+id/checkbox"
+                app:layout_constraintStart_toEndOf="@+id/basket_checkbox"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintBottom_toBottomOf="@+id/checkbox"
+                app:layout_constraintBottom_toBottomOf="@+id/basket_checkbox"
                 />
 
         </androidx.constraintlayout.widget.ConstraintLayout>

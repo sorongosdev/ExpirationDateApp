@@ -21,7 +21,7 @@ import java.text.SimpleDateFormat
 import java.time.LocalDate
 import java.util.*
 
-class Home : Fragment(), DeleteItemClick{
+class HomeFragment : Fragment(), DeleteItemClick{
 //class Home : Fragment(){
     private lateinit var binding: FragmentHomeBinding
     lateinit var model: MainViewModel
