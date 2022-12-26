@@ -40,6 +40,7 @@ class BasketListAdapter(var basketList: List<BasketListLayout>):
 //            basketList = basketList+new
             basketList = new
             notifyDataSetChanged()
+//            notifyItemInserted(itemCount)
             Log.d("basket_getItemCount","$new")
         }
     }

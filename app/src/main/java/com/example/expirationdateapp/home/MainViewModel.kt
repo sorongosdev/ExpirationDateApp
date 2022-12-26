@@ -30,15 +30,22 @@ class MainViewModel: ViewModel() {
 
     init {
         Log.d("mainViewModel","init")
+        Log.d("mainViewModel","getList")
         getList()
+        Log.d("mainViewModel","getTime")
         getTime()
     }
 
     /**snapshot read*/
     fun getList() {
         BasketList = mutableListOf<BasketListLayout>()
+        Log.d("liveBasketListData","init, ${BasketList.size}")
+
         listenerBasic = player.orderBy("name")
             .addSnapshotListener { snapshot, e ->
+                BasketList.clear()
+                Log.d("liveBasketListData","clear, ${BasketList.size}")
+
                 if (e != null) {
                     Log.d(TAG, "User VM not listening")
                 }
@@ -57,10 +64,9 @@ class MainViewModel: ViewModel() {
 //                            liveBasketListData.value.addAll(mutableListOf(BasketListLayout(doc.id)))
 //                            liveBasketItemData.value = BasketListLayout(doc.id)
 //                            Log.d("liveBasketItemData","updated, ${liveBasketItemData.value}")
-                            Log.d("liveBasketListData","updated, ${BasketList}")
+                            Log.d("liveBasketListData","updated, ${BasketList.size}")
                         }
                     }
-                    Log.d("MainViewModel getList","for ended")
                      // 리스트 개수 하나를 변화로 인식?
                     liveBasketListData.value = BasketList
                 }
