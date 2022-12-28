@@ -1,4 +1,4 @@
-package com.example.expirationdateapp.basket
+package com.example.expirationdateapp.calender
 
 import android.content.Context
 import android.util.Log
@@ -14,31 +14,27 @@ import com.example.expirationdateapp.databinding.BasketListLayoutBinding
 import com.example.expirationdateapp.home.ListLayout
 import com.google.firebase.firestore.DocumentSnapshot
 
-class BasketListAdapter(var basketList: List<BasketListLayout>):
+class FoodListAdapter(var FoodList: List<CalFoodBox>):
 
-    RecyclerView.Adapter<BasketListAdapter.ViewHolder>() {
+    RecyclerView.Adapter<FoodListAdapter.ViewHolder>() {
 
         override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-            val binding = LayoutInflater.from(parent.context).inflate(R.layout.basket_list_layout, parent, false)
+            val binding = LayoutInflater.from(parent.context).inflate(R.layout.cal_food_box, parent, false)
             return ViewHolder(binding)
         }
 
         override fun getItemCount(): Int {
-            Log.d("basket_getItemCount","${basketList.size}")
-            return basketList.size
+            Log.d("food_getItemCount","${FoodList.size}")
+            return FoodList.size
         }
 
         override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-            holder.name.text = basketList[position].itemName
+            holder.foodName.text = FoodList[position].FoodName
         }
 
         class ViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
-            val name: TextView = itemView.findViewById(R.id.basket_item_name)
+            val foodName: TextView = itemView.findViewById(R.id.cal_food_name)
         }
 
-        fun setData(new : List<BasketListLayout>){
-            basketList = new
-            notifyDataSetChanged()
-            Log.d("basket_getItemCount","$new")
-        }
+
     }

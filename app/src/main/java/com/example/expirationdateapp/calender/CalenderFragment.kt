@@ -11,6 +11,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.expirationdateapp.R
+import com.example.expirationdateapp.basket.BasketListAdapter
 import com.example.expirationdateapp.databinding.FragmentCalenderBinding
 import com.example.expirationdateapp.home.ListAdapter
 import java.text.SimpleDateFormat
@@ -22,7 +23,6 @@ import kotlin.collections.ArrayList
 
 class CalenderFragment : Fragment() {
     private lateinit var binding: FragmentCalenderBinding
-    private val dateFormat = SimpleDateFormat("MM월 yyyy")
     private lateinit var selectedDate : LocalDate
     private lateinit var dayList: MutableList<CalListLayout>
 
@@ -54,6 +54,8 @@ class CalenderFragment : Fragment() {
             layoutManager = GridLayoutManager(context, 7, LinearLayoutManager.VERTICAL, false)
         }
 
+
+
         return binding.root
     }
 
@@ -81,7 +83,9 @@ class CalenderFragment : Fragment() {
                 dayList.add(CalListLayout(""))
             }
             else{
+                /**캘린더 날짜 업데이트*/
                 dayList.add(CalListLayout((i-dayOfWeek).toString()))
+                /**해당 날짜의 이벤트 탐색*/
             }
         }
         return dayList

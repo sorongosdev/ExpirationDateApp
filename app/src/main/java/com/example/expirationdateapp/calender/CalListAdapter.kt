@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import android.widget.BaseAdapter
 import android.widget.Button
 import android.widget.TextView
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.expirationdateapp.R
 import com.example.expirationdateapp.databinding.BasketListLayoutBinding
@@ -30,10 +31,15 @@ class CalListAdapter(var dayList: List<CalListLayout>):
 
         override fun onBindViewHolder(holder: ViewHolder, position: Int) {
             holder.dayText.text = dayList[position].dayText
+            holder.foodRv.apply{
+                layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
+                adapter = FoodListAdapter(listOf(CalFoodBox("ss"),CalFoodBox("mm")))
+            }
         }
 
         class ViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
             val dayText: TextView = itemView.findViewById(R.id.dayText)
+            val foodRv : RecyclerView = itemView.findViewById(R.id.cal_food_rv)
         }
 
 
