@@ -15,12 +15,8 @@ class MainViewModel: ViewModel() {
     lateinit var listenerBasic: ListenerRegistration
     val liveItemListData = MutableLiveData<List<DocumentSnapshot>>()
 
-//    val liveBasketListData = MutableLiveData<List<DocumentSnapshot>>()
     val liveBasketListData = MutableLiveData<List<BasketListLayout>>()
     lateinit var BasketList : MutableList<BasketListLayout> // can append
-//    val liveBasketListData = MutableLiveData<BasketListLayout>()
-//    var liveBasketItemData = MutableLiveData<BasketListLayout>()
-//    var liveBasketItemData = MutableLiveData<String>()
 
     val player = db.collection("player")
     lateinit var dataStr :String
@@ -57,13 +53,6 @@ class MainViewModel: ViewModel() {
                         if (doc["take"] == true) {
                             Log.d("liveBasketListData","${doc.id} => ${doc["take"]}")
                             BasketList.add(BasketListLayout(doc.id))
-//                            BasketList = BasketList + BasketListLayout(doc.id)
-//                            liveBasketItemData.value = BasketListLayout(doc.id)
-//                            val liveBasketListData = MutableLiveData<List<BasketListLayout>>()
-//                            liveBasketListData.value = mutableListOf(BasketListLayout(doc.id))
-//                            liveBasketListData.value.addAll(mutableListOf(BasketListLayout(doc.id)))
-//                            liveBasketItemData.value = BasketListLayout(doc.id)
-//                            Log.d("liveBasketItemData","updated, ${liveBasketItemData.value}")
                             Log.d("liveBasketListData","updated, ${BasketList.size}")
                         }
                     }
