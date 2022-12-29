@@ -61,10 +61,12 @@ class HomeFragment : Fragment(), DeleteItemClick{
         return binding.root
     }
 
+    @RequiresApi(Build.VERSION_CODES.O)
     override fun deleteItemCall(ItemName: String){
         model.deleteItem(ItemName) // name만 넘겨줘야함
     }
 
+    @RequiresApi(Build.VERSION_CODES.O)
     override fun takeItemCall(ItemName: String){
         model.takeItem(ItemName) // name만 넘겨줘야함
     }

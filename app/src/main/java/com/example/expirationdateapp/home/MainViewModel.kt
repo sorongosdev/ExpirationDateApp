@@ -8,6 +8,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.expirationdateapp.basket.BasketListAdapter
 import com.example.expirationdateapp.basket.BasketListLayout
+import com.example.expirationdateapp.calender.CalFoodBox
 import com.google.firebase.firestore.*
 import java.text.SimpleDateFormat
 import java.time.LocalDate
@@ -108,15 +109,28 @@ class MainViewModel: ViewModel() {
 
     @RequiresApi(Build.VERSION_CODES.O)
     fun getTime(){
-//        liveTodayData.value = SimpleDateFormat("yyyyMMdd").format(Date(System.currentTimeMillis()))
         var selectedDate = LocalDate.now()
         liveTodayData.value = selectedDate.format(DateTimeFormatter.ofPattern("yyyyMMdd"))
     }
 
+    /**Calculate Dday*/
     fun calDday(eDate: String, sDate: String?) : Long{
         val dateFormat = SimpleDateFormat("yyyyMMdd")
         val sDateTime = dateFormat.parse(sDate).time
         val eDateTime = dateFormat.parse(eDate).time
         return ((eDateTime-sDateTime) / (24 * 60 * 60 * 1000))
+    }
+
+    /**DB의 useby에서 해당월과 같은 월인 monthFoodList를 가져옴*/
+    fun getMonthFood(syyyyMM: String) : MutableList<CalFoodBox> {
+
+        var lst = mutableListOf<CalFoodBox>()
+        for (i in liveItemListData.value!!){
+            val useby = i.data?.get("useby").toString()
+            if(useby.substring(0 until 6) == syyyyMM){
+                lst.add(CalFoodBox(i.id, useby))
+            }
+        }
+        return lst
     }
 }

@@ -27,7 +27,6 @@ class ListAdapter (var itemList: List<DocumentSnapshot>, listener: DeleteItemCli
         holder.useby.text = itemList[position].getString("useby")
         holder.dDay.text = itemList[position].getLong("dday").toString()
         holder.btnDelete.setOnClickListener {
-            //db 삭제
             mCallback.deleteItemCall(holder.name.text as String)
         }
         holder.btnTake.setOnClickListener {

@@ -2,18 +2,21 @@ package com.example.expirationdateapp.calender
 
 import android.os.Build
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.annotation.RequiresApi
 import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.expirationdateapp.R
 import com.example.expirationdateapp.basket.BasketListAdapter
 import com.example.expirationdateapp.databinding.FragmentCalenderBinding
 import com.example.expirationdateapp.home.ListAdapter
+import com.example.expirationdateapp.home.MainViewModel
 import java.text.SimpleDateFormat
 import java.time.LocalDate
 import java.time.YearMonth
@@ -25,12 +28,17 @@ class CalenderFragment : Fragment() {
     private lateinit var binding: FragmentCalenderBinding
     private lateinit var selectedDate : LocalDate
     private lateinit var dayList: MutableList<CalListLayout>
+    private lateinit var model: MainViewModel
+    private lateinit var foodList: MutableList<CalFoodBox>
 
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_calender,container,false)
         binding.lifecycleOwner =viewLifecycleOwner
+
+        /**뷰모델 가져오기*/
+        model = ViewModelProvider(requireActivity()).get(MainViewModel::class.java)
 
         /**오늘 날짜 가져오기*/
         selectedDate = LocalDate.now()
@@ -54,16 +62,21 @@ class CalenderFragment : Fragment() {
             layoutManager = GridLayoutManager(context, 7, LinearLayoutManager.VERTICAL, false)
         }
 
-
-
         return binding.root
     }
 
     @RequiresApi(Build.VERSION_CODES.O)
+    /**캘린더 뷰 세팅*/
     fun setMonthView(){
+        Log.d("setMonthView","fun start")
         binding.monthYearText.text = selectedDate.format(DateTimeFormatter.ofPattern("MM월 yyyy"))
         dayList = daysInMonthArray(selectedDate)
-        binding.calRv.adapter = CalListAdapter(dayList)
+        binding.calRv.adapter = CalListAdapter(
+            dayList, // dayList : List<CalListLayout>
+            model.getMonthFood( // monthFoodList<CalFoodBox>
+                selectedDate.format(DateTimeFormatter.ofPattern("yyyyMM"))
+            )
+        )
     }
 
     @RequiresApi(Build.VERSION_CODES.O)
@@ -78,7 +91,7 @@ class CalenderFragment : Fragment() {
         /**첫째 날 요일 가져오기*/
         val dayOfWeek : Int = firstDay.dayOfWeek.value
 
-        for(i:Int in 1 until 42){
+        for(i:Int in 1..42){
             if(i <= dayOfWeek || i > lastDay + dayOfWeek){
                 dayList.add(CalListLayout(""))
             }

@@ -15,9 +15,11 @@ import com.example.expirationdateapp.databinding.BasketListLayoutBinding
 import com.example.expirationdateapp.home.ListLayout
 import com.google.firebase.firestore.DocumentSnapshot
 
-class CalListAdapter(var dayList: List<CalListLayout>):
+class CalListAdapter(var dayList: List<CalListLayout>,var monthFoodList: List<CalFoodBox>):
 
     RecyclerView.Adapter<CalListAdapter.ViewHolder>() {
+
+        lateinit var dayFoodList: MutableList<CalFoodBox>
 
         override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
             val binding = LayoutInflater.from(parent.context).inflate(R.layout.cal_list_layout, parent, false)
@@ -25,15 +27,20 @@ class CalListAdapter(var dayList: List<CalListLayout>):
         }
 
         override fun getItemCount(): Int {
-            Log.d("cal_getItemCount","${dayList.size}")
+            Log.d("CalListAdapter_getItemCount","${dayList.size}")
             return dayList.size
         }
 
         override fun onBindViewHolder(holder: ViewHolder, position: Int) {
             holder.dayText.text = dayList[position].dayText
-            holder.foodRv.apply{
-                layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
-                adapter = FoodListAdapter(listOf(CalFoodBox("ss"),CalFoodBox("mm")))
+            if (holder.dayText.text.length != 0) {
+                holder.foodRv.apply {
+                    Log.d("CalListAdapter_onBindViewHolder","holder.foodRv.apply")
+                    layoutManager =
+                        LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
+                    getDayFood(Date2String((holder.dayText.text as String).toInt()))
+                    adapter = FoodListAdapter(dayFoodList)
+                }
             }
         }
 
@@ -42,5 +49,19 @@ class CalListAdapter(var dayList: List<CalListLayout>):
             val foodRv : RecyclerView = itemView.findViewById(R.id.cal_food_rv)
         }
 
+        /**monthFoodList에서 dayFoodList를 생성*/
+        fun getDayFood(dayText: String){
+            Log.d("CalListAdapter_getDayFood","start")
+            dayFoodList = mutableListOf<CalFoodBox>()
+            for(i in monthFoodList){
+                if(i.FoodDate.substring(6,8) == dayText){
+                    dayFoodList.add(CalFoodBox(i.FoodName,i.FoodName))
+                }
+            }
+        }
+        fun Date2String(date: Int): String{
+            if (date < 10) return "0" + date.toString()
 
+            else return date.toString()
+        }
     }
