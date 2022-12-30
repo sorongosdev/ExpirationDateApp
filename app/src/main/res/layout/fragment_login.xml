@@ -1,14 +1,38 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:tools="http://schemas.android.com/tools">
-    <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:tools="http://schemas.android.com/tools"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        tools:context=".basket.BasketFragment">
-        <TextView
-            android:text="login"
+<layout>
+        <LinearLayout
+            xmlns:android="http://schemas.android.com/apk/res/android"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            />
-    </FrameLayout>
+            android:orientation="vertical">
+            <TextView
+                android:text="로그인"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                />
+            <EditText
+                android:id="@+id/log_input_id"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="아이디 입력"
+                />
+            <EditText
+                android:id="@+id/log_input_pw"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="비밀번호 입력"
+                />
+            <Button
+                android:id="@+id/btn_login"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="로그인"
+                />
+            <Button
+                android:id="@+id/btn_register"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="가입하기"
+                />
+        </LinearLayout>
 </layout>
