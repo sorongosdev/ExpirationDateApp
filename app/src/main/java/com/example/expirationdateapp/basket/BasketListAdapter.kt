@@ -11,10 +11,11 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.expirationdateapp.R
 import com.example.expirationdateapp.databinding.BasketListLayoutBinding
+import com.example.expirationdateapp.home.DeleteItemClick
 import com.example.expirationdateapp.home.ListLayout
 import com.google.firebase.firestore.DocumentSnapshot
 
-class BasketListAdapter(var basketList: List<BasketListLayout>):
+class BasketListAdapter(var basketList: List<BasketListLayout>, listener: BasketCallBack):
 
     RecyclerView.Adapter<BasketListAdapter.ViewHolder>() {
 
@@ -30,10 +31,15 @@ class BasketListAdapter(var basketList: List<BasketListLayout>):
 
         override fun onBindViewHolder(holder: ViewHolder, position: Int) {
             holder.name.text = basketList[position].itemName
+            holder.btnTakeOut.setOnClickListener {
+                mCallback.takeOutItemCall(holder.name.text.toString())
+            }
         }
+        private val mCallback = listener
 
         class ViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
             val name: TextView = itemView.findViewById(R.id.basket_item_name)
+            val btnTakeOut: Button = itemView.findViewById(R.id.basket_btn_take_out)
         }
 
         fun setData(new : List<BasketListLayout>){

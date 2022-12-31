@@ -107,6 +107,11 @@ class MainViewModel: ViewModel() {
         player.document(itemName).update("take", true)
     }
 
+    /**장바구니에서 삭제*/
+    fun takeOutItem(itemName: String) {
+        player.document(itemName).update("take", false)
+    }
+
     fun Date2String(date: Int): String{
         if (date < 10) return "0" + date.toString()
 

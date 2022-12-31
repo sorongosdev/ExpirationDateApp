@@ -14,11 +14,14 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.expirationdateapp.R
 import com.example.expirationdateapp.calender.FoodListAdapter
 import com.example.expirationdateapp.databinding.FragmentBasketBinding
+import com.example.expirationdateapp.home.DeleteItemClick
 import com.example.expirationdateapp.home.ListAdapter
 import com.example.expirationdateapp.home.MainViewModel
 
-class BasketFragment : Fragment() {
+class BasketFragment : Fragment(), BasketCallBack {
     private lateinit var binding: FragmentBasketBinding
+    lateinit var model: MainViewModel
+    private val listener = this
 
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
@@ -28,10 +31,10 @@ class BasketFragment : Fragment() {
 
         binding.basketRv.apply{
             layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
-            adapter = BasketListAdapter(mutableListOf())
+            adapter = BasketListAdapter(mutableListOf(), listener)
         }
 
-        val model = ViewModelProvider(requireActivity()).get(MainViewModel::class.java)
+        model = ViewModelProvider(requireActivity()).get(MainViewModel::class.java)
 
         /**리스트뷰 업데이트*/
         model.liveBasketListData.observe(viewLifecycleOwner){
@@ -40,5 +43,10 @@ class BasketFragment : Fragment() {
         }
 
         return binding.root
+    }
+
+    @RequiresApi(Build.VERSION_CODES.O)
+    override fun takeOutItemCall(ItemName: String) {
+        model.takeOutItem(ItemName)
     }
 }

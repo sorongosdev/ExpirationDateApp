@@ -70,9 +70,4 @@ class HomeFragment : Fragment(), DeleteItemClick{
     override fun takeItemCall(ItemName: String){
         model.takeItem(ItemName) // name만 넘겨줘야함
     }
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-        Log.d(TAG, "onDestroyView")
-    }
 }
