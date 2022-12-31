@@ -1,16 +1,19 @@
 package com.example.expirationdateapp.login
 
+import android.content.ContentValues
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.navigation.findNavController
+import androidx.navigation.fragment.findNavController
 import com.example.expirationdateapp.R
 import com.example.expirationdateapp.databinding.FragmentLoginBinding
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 
@@ -30,22 +33,32 @@ class LoginFragment : Fragment() {
 
         /**로그인 버튼*/
         binding.btnLogin.setOnClickListener {
-            it.findNavController().navigate(R.id.action_loginFragment_to_homeFragment) // `view->` 를 대채하는 `it`
+//            it.findNavController().navigate(R.id.action_loginFragment_to_homeFragment) // `view->` 를 대채하는 `it`
+            signIn(binding.logInputId.text.toString(),binding.logInputPw.text.toString())
         }
-
-        /**로그인 구현*/
-
-
 
         return binding.root
     }
 
-//    override fun onStart() {
-//        super.onStart()
-//        // Check if user is signed in (non-null) and update UI accordingly.
-//        val currentUser = auth.currentUser
-//        if(currentUser != null){
-////            reload()
-//        }
-//    }
+    /**로그인*/
+    private fun signIn(email: String, password: String) {
+        if (email.isNotEmpty() && password.isNotEmpty()) {
+            auth?.signInWithEmailAndPassword(email, password)
+                ?.addOnCompleteListener(requireActivity()) { task ->
+                    if (task.isSuccessful) {
+                        Log.d(ContentValues.TAG,"signInWithEmail: success")
+                        moveHome(auth?.currentUser)
+                    } else {
+                        Log.d(ContentValues.TAG,"signInWithEmail: failed")
+                    }
+                }
+        }
+    }
+
+    /**로그인 성공시 화면 전환*/
+    fun moveHome(user: FirebaseUser?){
+        if(user != null){
+            findNavController().navigate(R.id.action_loginFragment_to_homeFragment) // `view->` 를 대채하는 `it`
+        }
+    }
 }
