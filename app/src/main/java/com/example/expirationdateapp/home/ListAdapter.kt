@@ -25,7 +25,18 @@ class ListAdapter (var itemList: List<DocumentSnapshot>, listener: DeleteItemCli
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.name.text = itemList[position].getString("name")
         holder.useby.text = itemList[position].getString("useby")
-        holder.dDay.text = itemList[position].getLong("dday").toString()
+        /**디데이*/
+        var dDay : Long? = itemList[position].getLong("dday")
+        if(dDay!! > 0){
+            holder.dDay.text = "D+" + dDay.toString()
+        }
+        else if(dDay.toString() == "0"){
+            holder.dDay.text = "D-DAY"
+        }
+        else{
+            holder.dDay.text = "D" + dDay.toString()
+        }
+//        holder.dDay.text = 'D' + itemList[position].getLong("dday").toString()
         holder.btnDelete.setOnClickListener {
             mCallback.deleteItemCall(holder.name.text as String)
         }

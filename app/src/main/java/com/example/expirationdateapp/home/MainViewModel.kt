@@ -9,7 +9,10 @@ import androidx.lifecycle.ViewModel
 import com.example.expirationdateapp.basket.BasketListAdapter
 import com.example.expirationdateapp.basket.BasketListLayout
 import com.example.expirationdateapp.calender.CalFoodBox
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.*
+import com.google.firebase.ktx.Firebase
 import java.text.SimpleDateFormat
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
@@ -20,10 +23,12 @@ class MainViewModel: ViewModel() {
     private val db = FirebaseFirestore.getInstance()
     lateinit var listenerBasic: ListenerRegistration
     val liveItemListData = MutableLiveData<List<DocumentSnapshot>>()
+    private var auth : FirebaseAuth = Firebase.auth
 
     val liveBasketListData = MutableLiveData<List<BasketListLayout>>()
     lateinit var BasketList : MutableList<BasketListLayout> // can append
 
+//    val player = db.collection(auth.uid.toString())
     val player = db.collection("player")
     lateinit var dataStr :String
 
@@ -36,6 +41,7 @@ class MainViewModel: ViewModel() {
         getList()
         Log.d("mainViewModel","getTime")
         getTime()
+        Log.d(TAG,"사용자 uid : ${auth.uid}")
     }
 
     /**snapshot read*/
@@ -118,7 +124,7 @@ class MainViewModel: ViewModel() {
         val dateFormat = SimpleDateFormat("yyyyMMdd")
         val sDateTime = dateFormat.parse(sDate).time
         val eDateTime = dateFormat.parse(eDate).time
-        return ((eDateTime-sDateTime) / (24 * 60 * 60 * 1000))
+        return ((sDateTime-eDateTime) / (24 * 60 * 60 * 1000))
     }
 
     /**DB의 useby에서 해당월과 같은 월인 monthFoodList를 가져옴*/

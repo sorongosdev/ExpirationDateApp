@@ -55,7 +55,7 @@ class ItemAdd : Fragment() {
         binding.itemRegister.setOnClickListener {
             val aItemName = binding.itemName.text.toString()
             val aItemExpire = dayText.text.toString()
-            val aItemDday = (eDateTime-sDateTime) / (24 * 60 * 60 * 1000)
+            val aItemDday = (sDateTime-eDateTime) / (24 * 60 * 60 * 1000)
 
             model.addItem(aItemName,ListLayout(aItemName,aItemExpire,aItemDday))
             

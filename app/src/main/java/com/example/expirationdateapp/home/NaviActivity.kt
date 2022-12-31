@@ -2,10 +2,12 @@ package com.example.expirationdateapp.home
 
 import android.content.ContentValues
 import android.content.Intent
+import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import androidx.activity.viewModels
+import androidx.annotation.RequiresApi
 import androidx.lifecycle.Observer
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.NavHostFragment
@@ -21,6 +23,7 @@ class NaviActivity : AppCompatActivity() {
     private val model : MainViewModel by viewModels<MainViewModel>()
 ////    private val TAG = NaviActivity::class.java.simpleName
 
+    @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityNaviBinding.inflate(layoutInflater)
@@ -42,6 +45,7 @@ class NaviActivity : AppCompatActivity() {
         })
     }
     /** DynamicLink */
+    @RequiresApi(Build.VERSION_CODES.O)
     private fun initDynamicLink() {
         val dynamicLinkData = intent.extras //
         if (dynamicLinkData != null) {
