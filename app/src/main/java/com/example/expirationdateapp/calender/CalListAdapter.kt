@@ -27,7 +27,6 @@ class CalListAdapter(var dayList: List<CalListLayout>,var monthFoodList: List<Ca
         }
 
         override fun getItemCount(): Int {
-            Log.d("CalListAdapter_getItemCount","${dayList.size}")
             return dayList.size
         }
 
@@ -51,7 +50,6 @@ class CalListAdapter(var dayList: List<CalListLayout>,var monthFoodList: List<Ca
 
         /**monthFoodList에서 dayFoodList를 생성*/
         fun getDayFood(dayText: String){
-            Log.d("CalListAdapter_getDayFood","start")
             dayFoodList = mutableListOf<CalFoodBox>()
             for(i in monthFoodList){
                 if(i.FoodDate.substring(6,8) == dayText){

@@ -68,7 +68,6 @@ class CalenderFragment : Fragment() {
     @RequiresApi(Build.VERSION_CODES.O)
     /**캘린더 뷰 세팅*/
     fun setMonthView(){
-        Log.d("setMonthView","fun start")
         binding.monthYearText.text = selectedDate.format(DateTimeFormatter.ofPattern("MM월 yyyy"))
         dayList = daysInMonthArray(selectedDate)
         binding.calRv.adapter = CalListAdapter(

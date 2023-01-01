@@ -24,7 +24,6 @@ class FoodListAdapter(var FoodList: List<CalFoodBox>):
         }
 
         override fun getItemCount(): Int {
-            Log.d("food_getItemCount","${FoodList.size}")
             return FoodList.size
         }
 

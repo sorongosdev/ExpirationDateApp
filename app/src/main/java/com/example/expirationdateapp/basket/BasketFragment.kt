@@ -39,7 +39,6 @@ class BasketFragment : Fragment(), BasketCallBack {
         /**리스트뷰 업데이트*/
         model.liveBasketListData.observe(viewLifecycleOwner){
             (binding.basketRv.adapter as BasketListAdapter).setData(it)
-            Log.d("liveBasketListData","set data")
         }
 
         return binding.root

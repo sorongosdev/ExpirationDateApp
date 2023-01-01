@@ -1,5 +1,6 @@
 package com.example.expirationdateapp.home
 
+import android.content.ContentValues.TAG
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -36,10 +37,11 @@ class ListAdapter (var itemList: List<DocumentSnapshot>, listener: DeleteItemCli
         else{
             holder.dDay.text = "D" + dDay.toString()
         }
-//        holder.dDay.text = 'D' + itemList[position].getLong("dday").toString()
+        /**삭제버튼*/
         holder.btnDelete.setOnClickListener {
             mCallback.deleteItemCall(holder.name.text as String)
         }
+        /**장바구니 버튼*/
         holder.btnTake.setOnClickListener {
             mCallback.takeItemCall(holder.name.text as String)
         }
@@ -57,5 +59,6 @@ class ListAdapter (var itemList: List<DocumentSnapshot>, listener: DeleteItemCli
     fun setData(new : List<DocumentSnapshot>){
         itemList = new
         notifyDataSetChanged()
+        Log.d(TAG,"setData List : ${new}")
     }
 }

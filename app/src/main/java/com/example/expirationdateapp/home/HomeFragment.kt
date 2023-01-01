@@ -22,7 +22,6 @@ import java.time.LocalDate
 import java.util.*
 
 class HomeFragment : Fragment(), DeleteItemClick{
-//class Home : Fragment(){
     private lateinit var binding: FragmentHomeBinding
     lateinit var model: MainViewModel
     private val listener = this
@@ -44,6 +43,7 @@ class HomeFragment : Fragment(), DeleteItemClick{
 
         /**리스트뷰 업데이트*/
         model.liveItemListData.observe(viewLifecycleOwner){
+            Log.d(TAG,"liveItemListData observe : $it")
             (binding.rvList.adapter as ListAdapter).setData(it)
         }
 
@@ -63,11 +63,11 @@ class HomeFragment : Fragment(), DeleteItemClick{
 
     @RequiresApi(Build.VERSION_CODES.O)
     override fun deleteItemCall(ItemName: String){
-        model.deleteItem(ItemName) // name만 넘겨줘야함
+        model.deleteItem(ItemName)
     }
 
     @RequiresApi(Build.VERSION_CODES.O)
     override fun takeItemCall(ItemName: String){
-        model.takeItem(ItemName) // name만 넘겨줘야함
+        model.takeItem(ItemName)
     }
 }

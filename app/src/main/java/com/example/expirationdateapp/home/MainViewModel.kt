@@ -23,6 +23,7 @@ class MainViewModel: ViewModel() {
     private val db = FirebaseFirestore.getInstance()
     lateinit var listenerBasic: ListenerRegistration
     val liveItemListData = MutableLiveData<List<DocumentSnapshot>>()
+//    val liveItemListData = MutableLiveData<List<ListLayout>>()
     private var auth : FirebaseAuth = Firebase.auth
 
     val liveBasketListData = MutableLiveData<List<BasketListLayout>>()
@@ -36,10 +37,7 @@ class MainViewModel: ViewModel() {
     var liveTodayData = MutableLiveData<String>()
 
     init {
-        Log.d("mainViewModel","init")
-        Log.d("mainViewModel","getList")
         getList()
-        Log.d("mainViewModel","getTime")
         getTime()
         Log.d(TAG,"사용자 uid : ${auth.uid}")
     }
@@ -47,29 +45,28 @@ class MainViewModel: ViewModel() {
     /**snapshot read*/
     fun getList() {
         BasketList = mutableListOf<BasketListLayout>()
-        Log.d("liveBasketListData","init, ${BasketList.size}")
 
         listenerBasic = player.orderBy("name")
             .addSnapshotListener { snapshot, e ->
                 BasketList.clear()
-                Log.d("liveBasketListData","clear, ${BasketList.size}")
 
                 if (e != null) {
                     Log.d(TAG, "User VM not listening")
                 }
-                if (snapshot != null) {
-                    for (doc in snapshot) {
-                        liveItemListData.value = snapshot.documents
-                        Log.d("liveBasketListData","${doc.id} => ${doc["useby"]}")
-
-                        /**장바구니 리스트 업데이트*/
-                        if (doc["take"] == true) {
-                            BasketList.add(BasketListLayout(doc.id))
-                            Log.d("liveBasketListData","updated, ${BasketList.size}")
+                if (snapshot != null) { // capture added
+                    Log.d(TAG,"snapshot isEmpty : ${snapshot.isEmpty}") // 스냅샷의 변화의 유무
+                    if (snapshot.isEmpty) liveItemListData.value = emptyList()
+                    else {
+                        for (doc in snapshot) {
+                            Log.d(TAG, "${snapshot.documents}")
+                            liveItemListData.value = snapshot.documents
+                            /**장바구니 리스트 업데이트*/
+                            if (doc["take"] == true) {
+                                BasketList.add(BasketListLayout(doc.id))
+                            }
                         }
+                        liveBasketListData.value = BasketList
                     }
-                     // 리스트 개수 하나를 변화로 인식?
-                    liveBasketListData.value = BasketList
                 }
             }
     }
@@ -86,6 +83,8 @@ class MainViewModel: ViewModel() {
             .addOnFailureListener { exception ->
                 Log.d("MainViewModel", "Error delete documents: $exception")    // 실패할 경우
             }
+        // 리스트에 마지막 아이템 삭제 하고 나서는 라이브데이터가 안 바뀐다?
+
     }
 
     /**디데이를 업데이트 해주는 함수*/
@@ -136,11 +135,17 @@ class MainViewModel: ViewModel() {
     fun getMonthFood(syyyyMM: String) : MutableList<CalFoodBox> {
 
         var lst = mutableListOf<CalFoodBox>()
-        for (i in liveItemListData.value!!){
-            val useby = i.data?.get("useby").toString()
-            if(useby.substring(0 until 6) == syyyyMM){
-                lst.add(CalFoodBox(i.id, useby))
+        if (liveItemListData.value != null){
+            for (i in liveItemListData.value!!) {
+                val useby = i.data?.get("useby").toString()
+                if (useby.substring(0 until 6) == syyyyMM) {
+                    lst.add(CalFoodBox(i.id, useby))
+                }
             }
+        }
+        else {
+            Log.d(TAG, "liveItemListData null")
+
         }
         return lst
     }

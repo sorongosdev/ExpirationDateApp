@@ -25,7 +25,6 @@ class BasketListAdapter(var basketList: List<BasketListLayout>, listener: Basket
         }
 
         override fun getItemCount(): Int {
-            Log.d("basket_getItemCount","${basketList.size}")
             return basketList.size
         }
 
@@ -45,6 +44,5 @@ class BasketListAdapter(var basketList: List<BasketListLayout>, listener: Basket
         fun setData(new : List<BasketListLayout>){
             basketList = new
             notifyDataSetChanged()
-            Log.d("basket_getItemCount","$new")
         }
     }
