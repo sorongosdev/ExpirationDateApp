@@ -21,7 +21,6 @@ class NaviActivity : AppCompatActivity() {
     private lateinit var binding: ActivityNaviBinding
 
     private val model : MainViewModel by viewModels<MainViewModel>()
-////    private val TAG = NaviActivity::class.java.simpleName
 
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -30,7 +29,7 @@ class NaviActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         // fragment controller
-        val navHostFragment = supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
+        val navHostFragment = supportFragmentManager.findFragmentById(R.id.nav_host_fragment2) as NavHostFragment
         val navController = navHostFragment.findNavController()
         binding.navigationView.setupWithNavController(navController)
 

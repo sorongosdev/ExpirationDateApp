@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+    <!-- 로딩 -->
+    <RelativeLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:clipToOutline="true"
+        android:background="@drawable/logo"
+        >
+        <TextView
+            android:id="@+id/keep_eat"
+            android:layout_width="219dp"
+            android:layout_height="192dp"
+            android:layout_alignParentLeft="true"
+            android:layout_marginLeft="85dp"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="292dp"
+            android:text="@string/keep_eat"
+            android:textAppearance="@style/keep_eat"
+            android:gravity="top"
+            android:fontFamily="@font/nanumgothicbold"/>
+        />
+
+        <View
+            android:id="@+id/rectangle_1"
+            android:layout_width="272dp"
+            android:layout_height="261dp"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginLeft="64dp"
+            android:layout_marginTop="272dp"
+            android:background="@drawable/rectangle_1" />
+    </RelativeLayout>
+
+</layout>

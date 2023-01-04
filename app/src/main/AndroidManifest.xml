@@ -24,7 +24,7 @@
             </intent-filter>
         </service>
         <activity
-            android:name=".home.NaviActivity"
+            android:name=".login.SplashActivity"
             android:exported="true">
 
             <intent-filter>
@@ -32,6 +32,10 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+        <activity
+            android:name=".home.NaviActivity"
+            android:exported="true">
         </activity>
 
     </application>

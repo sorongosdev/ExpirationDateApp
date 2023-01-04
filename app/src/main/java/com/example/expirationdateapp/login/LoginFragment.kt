@@ -1,7 +1,10 @@
 package com.example.expirationdateapp.login
 
 import android.content.ContentValues
+import android.content.Intent
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -12,6 +15,7 @@ import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import com.example.expirationdateapp.R
 import com.example.expirationdateapp.databinding.FragmentLoginBinding
+import com.example.expirationdateapp.home.NaviActivity
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.ktx.auth
@@ -37,6 +41,10 @@ class LoginFragment : Fragment() {
             signIn(binding.logInputId.text.toString(),binding.logInputPw.text.toString())
         }
 
+//        Handler(Looper.getMainLooper()).postDelayed({
+//            findNavController().popBackStack()
+//        }, 100)
+
         return binding.root
     }
 
@@ -46,6 +54,7 @@ class LoginFragment : Fragment() {
             auth?.signInWithEmailAndPassword(email, password)
                 ?.addOnCompleteListener(requireActivity()) { task ->
                     if (task.isSuccessful) {
+                        findNavController().popBackStack()
                         Log.d(ContentValues.TAG,"signInWithEmail: success")
                         moveHome(auth?.currentUser)
                     } else {
@@ -58,7 +67,8 @@ class LoginFragment : Fragment() {
     /**로그인 성공시 화면 전환*/
     fun moveHome(user: FirebaseUser?){
         if(user != null){
-            findNavController().navigate(R.id.action_loginFragment_to_homeFragment) // `view->` 를 대채하는 `it`
+            val intent= Intent(getActivity(), NaviActivity::class.java)
+            startActivity(intent)
         }
     }
 }

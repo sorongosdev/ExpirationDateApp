@@ -60,8 +60,7 @@ class ItemAdd : Fragment() {
             model.addItem(aItemName,ListLayout(aItemName,aItemExpire,aItemDday))
             
             // 등록버튼 눌렀을 때
-            val navController = findNavController()
-            navController.popBackStack()
+            findNavController().popBackStack()
         }
 
         return binding.root
