@@ -3,6 +3,7 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/Admin/AndroidStudioProjects/ExpirationDateApp/app/src/main/res/drawable/btn_circle.xml" value="0.173" />
         <entry key="..\:/Users/Admin/AndroidStudioProjects/ExpirationDateApp/app/src/main/res/drawable/calender_box.xml" value="0.163" />
         <entry key="..\:/Users/Admin/AndroidStudioProjects/ExpirationDateApp/app/src/main/res/drawable/ic_baseline_arrow_back_24.xml" value="0.1285" />
         <entry key="..\:/Users/Admin/AndroidStudioProjects/ExpirationDateApp/app/src/main/res/drawable/ic_baseline_arrow_forward_24.xml" value="0.1285" />
@@ -26,7 +27,7 @@
         <entry key="..\:/Users/Admin/AndroidStudioProjects/ExpirationDateApp/app/src/main/res/layout/fragment_login.xml" value="0.136" />
         <entry key="..\:/Users/Admin/AndroidStudioProjects/ExpirationDateApp/app/src/main/res/layout/fragment_register.xml" value="0.13552800342026508" />
         <entry key="..\:/Users/Admin/AndroidStudioProjects/ExpirationDateApp/app/src/main/res/layout/fragment_search.xml" value="0.24947916666666667" />
-        <entry key="..\:/Users/Admin/AndroidStudioProjects/ExpirationDateApp/app/src/main/res/layout/fragment_splash.xml" value="0.264" />
+        <entry key="..\:/Users/Admin/AndroidStudioProjects/ExpirationDateApp/app/src/main/res/layout/fragment_splash.xml" value="0.1" />
         <entry key="..\:/Users/Admin/AndroidStudioProjects/ExpirationDateApp/app/src/main/res/layout/list_layout.xml" value="0.264" />
         <entry key="..\:/Users/Admin/AndroidStudioProjects/ExpirationDateApp/app/src/main/res/layout/loading.xml" value="0.15403304178814384" />
         <entry key="..\:/Users/Admin/AndroidStudioProjects/ExpirationDateApp/app/src/main/res/menu/navi_menu.xml" value="0.24947916666666667" />

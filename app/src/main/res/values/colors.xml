@@ -10,6 +10,5 @@
     <color name="gold">#FFEB3B</color>
 
 <!--    custom -->
-    <color name="yellow">#F5DF4D</color>
-    <color name="gray">#939597</color>
+    <color name="main_blue">#005999</color>
 </resources>
