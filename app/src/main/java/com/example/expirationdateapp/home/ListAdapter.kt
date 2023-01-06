@@ -1,18 +1,21 @@
 package com.example.expirationdateapp.home
 
 import android.content.ContentValues.TAG
+import android.util.DisplayMetrics
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.WindowManager
 import android.widget.Button
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.expirationdateapp.R
 import com.google.firebase.firestore.DocumentSnapshot
 
+
 class ListAdapter (var itemList: List<DocumentSnapshot>, listener: DeleteItemClick):
-    RecyclerView.Adapter<ListAdapter.ViewHolder>() {
+    RecyclerView.Adapter<ListAdapter.ViewHolder>(), ItemTouchHelperListener {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val binding = LayoutInflater.from(parent.context).inflate(R.layout.list_layout, parent, false)
@@ -60,5 +63,26 @@ class ListAdapter (var itemList: List<DocumentSnapshot>, listener: DeleteItemCli
         itemList = new
         notifyDataSetChanged()
         Log.d(TAG,"setData List : ${new}")
+    }
+
+    override fun onItemMove(from_position: Int, to_position: Int): Boolean {
+
+        return true
+    }
+
+    override fun onItemSwipe(position: Int) {
+
+    }
+
+
+    //왼쪽 버튼 누르면 수정할 다이얼로그 띄우기
+    override fun onLeftClick(position: Int, viewHolder: RecyclerView.ViewHolder?) {
+
+    }
+
+
+    //오른쪽 버튼 누르면 아이템 삭제
+    override fun onRightClick(position: Int, viewHolder: RecyclerView.ViewHolder?) {
+
     }
 }

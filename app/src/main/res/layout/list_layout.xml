@@ -11,59 +11,84 @@
         android:layout_marginStart="10dp"
         android:layout_marginEnd="10dp"
         >
-
-        <androidx.constraintlayout.widget.ConstraintLayout
+        <FrameLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:padding="10dp"
-            >
+            android:layout_height="wrap_content">
+            <!--삭제 view-->
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/erase_item_view"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintWidth_percent="0.2"
+                    android:background="@color/main_red">
 
-            <TextView
-                android:id="@+id/search_name"
-                android:layout_width="wrap_content"
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="삭제"
+                        />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </androidx.constraintlayout.widget.ConstraintLayout>
+            <!--아이템 view-->
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="음식 이름"
-                android:textStyle="bold"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                />
+                android:padding="10dp"
+                android:id="@+id/swipe_view"
+                android:background="@color/white"
+                >
 
-            <TextView
-                android:id="@+id/search_useby"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="22.XX.XX"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/search_name"
-                />
+                <TextView
+                    android:id="@+id/search_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="음식 이름"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    />
 
-            <TextView
-                android:id="@+id/dDay"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:gravity="right"
-                android:text="D-0"
-                android:textSize="30dp"
-                app:layout_constraintEnd_toStartOf="@+id/btn_take_item"
-                />
-            <Button
-                android:id="@+id/btn_take_item"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:text="장바구니"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintEnd_toStartOf="@+id/btn_delete_item"
-                />
-            <Button
-                android:id="@+id/btn_delete_item"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:text="삭제"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                />
+                <TextView
+                    android:id="@+id/search_useby"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="22.XX.XX"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/search_name"
+                    />
 
-        </androidx.constraintlayout.widget.ConstraintLayout>
+                <TextView
+                    android:id="@+id/dDay"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:gravity="right"
+                    android:text="D-0"
+                    android:textSize="30dp"
+                    app:layout_constraintEnd_toStartOf="@+id/btn_take_item"
+                    />
+                <Button
+                    android:id="@+id/btn_take_item"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:text="장바구니"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintEnd_toStartOf="@+id/btn_delete_item"
+                    />
+                <Button
+                    android:id="@+id/btn_delete_item"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:text="삭제"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    />
 
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </FrameLayout>
     </androidx.cardview.widget.CardView>
 </layout>

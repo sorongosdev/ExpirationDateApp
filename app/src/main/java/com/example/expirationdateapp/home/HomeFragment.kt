@@ -1,7 +1,6 @@
 package com.example.expirationdateapp.home
 
 import android.content.ContentValues.TAG
-import android.content.Intent
 import android.os.Build
 import android.os.Bundle
 import android.util.Log
@@ -15,19 +14,17 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.expirationdateapp.MyFirebaseMessagingService
+import androidx.recyclerview.widget.RecyclerView
 import com.example.expirationdateapp.R
 import com.example.expirationdateapp.databinding.FragmentHomeBinding
-import java.text.SimpleDateFormat
-import java.time.LocalDate
-import java.util.*
 
-class HomeFragment : Fragment(), DeleteItemClick{
+
+//class HomeFragment : Fragment(), DeleteItemClick{
+class HomeFragment : Fragment(), DeleteItemClick, ItemTouchHelperListener{
     private lateinit var binding: FragmentHomeBinding
     lateinit var model: MainViewModel
     private val listener = this
-    val swipeHelper = SwipeHelper()
-    val itemTouchHelper = ItemTouchHelper(swipeHelper)
+    lateinit private var helper: ItemTouchHelper
 
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
@@ -39,7 +36,14 @@ class HomeFragment : Fragment(), DeleteItemClick{
         binding.rvList.apply{
             layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
             adapter = ListAdapter(emptyList(),listener)
-            itemTouchHelper.attachToRecyclerView(binding.rvList)
+//            val swipeHelper = SwipeHelper()
+//            val itemTouchHelper = ItemTouchHelper(swipeHelper)
+//            itemTouchHelper.attachToRecyclerView(binding.rvList)
+
+//            val itemTouchHelperCallback = ItemTouchHelperCallback(listener)
+            val itemTouchHelperCallback = ItemTouchHelperCallback(listener)
+            helper = ItemTouchHelper(itemTouchHelperCallback)
+            helper.attachToRecyclerView(binding.rvList)
         }
 
         /**viewmodel*/
@@ -73,5 +77,17 @@ class HomeFragment : Fragment(), DeleteItemClick{
     @RequiresApi(Build.VERSION_CODES.O)
     override fun takeItemCall(ItemName: String){
         model.takeItem(ItemName)
+    }
+    override fun onItemMove(from_position: Int, to_position: Int): Boolean{
+        return true
+    }
+    override fun onItemSwipe(position: Int){
+
+    }
+    override fun onLeftClick(position: Int, viewHolder: RecyclerView.ViewHolder?){
+
+    }
+    override fun onRightClick(position: Int, viewHolder: RecyclerView.ViewHolder?){
+
     }
 }
