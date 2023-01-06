@@ -14,26 +14,26 @@
         <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
-            <!--삭제 view-->
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/erase_item_view"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintWidth_percent="0.2"
-                    android:background="@color/main_red">
+<!--            &lt;!&ndash;삭제 view&ndash;&gt;-->
+<!--            <androidx.constraintlayout.widget.ConstraintLayout-->
+<!--                android:id="@+id/erase_item_view"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="match_parent">-->
+<!--                <androidx.constraintlayout.widget.ConstraintLayout-->
+<!--                    android:layout_width="0dp"-->
+<!--                    android:layout_height="match_parent"-->
+<!--                    app:layout_constraintEnd_toEndOf="parent"-->
+<!--                    app:layout_constraintWidth_percent="0.2"-->
+<!--                    android:background="@color/main_red">-->
 
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:text="삭제"
-                        />
+<!--                    <TextView-->
+<!--                        android:layout_width="match_parent"-->
+<!--                        android:layout_height="match_parent"-->
+<!--                        android:text="삭제"-->
+<!--                        />-->
 
-                </androidx.constraintlayout.widget.ConstraintLayout>
-            </androidx.constraintlayout.widget.ConstraintLayout>
+<!--                </androidx.constraintlayout.widget.ConstraintLayout>-->
+<!--            </androidx.constraintlayout.widget.ConstraintLayout>-->
             <!--아이템 view-->
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
