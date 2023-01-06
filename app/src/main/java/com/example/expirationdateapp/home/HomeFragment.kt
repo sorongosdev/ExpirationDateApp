@@ -24,7 +24,7 @@ class HomeFragment : Fragment(), DeleteItemClick, ItemTouchHelperListener{
     private lateinit var binding: FragmentHomeBinding
     lateinit var model: MainViewModel
     private val listener = this
-    lateinit private var helper: ItemTouchHelper
+    lateinit var helper: ItemTouchHelper
 
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
@@ -85,9 +85,7 @@ class HomeFragment : Fragment(), DeleteItemClick, ItemTouchHelperListener{
 
     }
     override fun onLeftClick(position: Int, viewHolder: RecyclerView.ViewHolder?){
-
     }
     override fun onRightClick(position: Int, viewHolder: RecyclerView.ViewHolder?){
-
     }
 }

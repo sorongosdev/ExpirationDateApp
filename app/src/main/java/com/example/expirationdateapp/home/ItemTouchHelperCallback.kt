@@ -1,5 +1,6 @@
 package com.example.expirationdateapp.home
 
+import android.annotation.SuppressLint
 import android.graphics.Canvas
 import android.graphics.Color
 import android.graphics.Paint
@@ -8,14 +9,15 @@ import android.view.MotionEvent
 import android.view.View
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
+import kotlin.math.max
+import kotlin.math.min
 
 
 internal enum class ButtonsState {
     GONE, LEFT_VISIBLE, RIGHT_VISIBLE
 }
 
-class ItemTouchHelperCallback(listener: ItemTouchHelperListener) : ItemTouchHelper.Callback() {
-    private var listener: ItemTouchHelperListener = listener
+class ItemTouchHelperCallback(private var listener: ItemTouchHelperListener) : ItemTouchHelper.Callback() {
     private var swipeBack = false
     private var buttonsShowedState = ButtonsState.GONE
     private var buttonInstance: RectF? = null
@@ -39,11 +41,11 @@ class ItemTouchHelperCallback(listener: ItemTouchHelperListener) : ItemTouchHelp
         viewHolder: RecyclerView.ViewHolder,
         target: RecyclerView.ViewHolder,
     ): Boolean {
-        return listener!!.onItemMove(viewHolder.adapterPosition, target.adapterPosition)
+        return listener.onItemMove(viewHolder.adapterPosition, target.adapterPosition)
     }
 
     override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
-        listener!!.onItemSwipe(viewHolder.adapterPosition)
+        listener.onItemSwipe(viewHolder.adapterPosition)
     }
 
     //아이템을 터치하거나 스와이프하거나 뷰에 변화가 생길경우 불러오는 함수
@@ -60,9 +62,9 @@ class ItemTouchHelperCallback(listener: ItemTouchHelperListener) : ItemTouchHelp
         var dX = dX
         if (actionState == ItemTouchHelper.ACTION_STATE_SWIPE) {
             if (buttonsShowedState != ButtonsState.GONE) {
-                if (buttonsShowedState == ButtonsState.LEFT_VISIBLE) dX = Math.max(dX, buttonWidth)
+                if (buttonsShowedState == ButtonsState.LEFT_VISIBLE) dX = max(dX, buttonWidth)
                 if (buttonsShowedState == ButtonsState.RIGHT_VISIBLE) dX =
-                    Math.min(dX, -buttonWidth)
+                    min(dX, -buttonWidth)
                 super.onChildDraw(c,
                     recyclerView,
                     viewHolder,
@@ -105,22 +107,22 @@ class ItemTouchHelperCallback(listener: ItemTouchHelperListener) : ItemTouchHelp
 
         //오른쪽으로 스와이프 했을때 (왼쪽에 버튼이 보여지게 될 경우)
         if (buttonsShowedState == ButtonsState.LEFT_VISIBLE) {
-            val leftButton = RectF((itemView.getLeft() + 10).toFloat(),
-                (itemView.getTop() + 10).toFloat(),
-                itemView.getLeft() + buttonWidthWithOutPadding,
-                (itemView.getBottom() - 10).toFloat())
-            p.setColor(Color.BLUE)
+            val leftButton = RectF((itemView.left + 10).toFloat(),
+                (itemView.top + 10).toFloat(),
+                itemView.left + buttonWidthWithOutPadding,
+                (itemView.bottom - 10).toFloat())
+            p.color = Color.BLUE
             c.drawRoundRect(leftButton, corners, corners, p)
             drawText("장바구니", c, leftButton, p)
             buttonInstance = leftButton
 
-            //왼쪽으로 스와이프 했을때 (오른쪽에 버튼이 보여지게 될 경우)
+        //왼쪽으로 스와이프 했을때 (오른쪽에 버튼이 보여지게 될 경우)
         } else if (buttonsShowedState == ButtonsState.RIGHT_VISIBLE) {
-            val rightButton = RectF(itemView.getRight() - buttonWidthWithOutPadding,
-                (itemView.getTop() + 10).toFloat(),
-                (itemView.getRight() - 10).toFloat(),
-                (itemView.getBottom() - 10).toFloat())
-            p.setColor(Color.RED)
+            val rightButton = RectF(itemView.right - buttonWidthWithOutPadding,
+                (itemView.top + 10).toFloat(),
+                (itemView.right - 10).toFloat(),
+                (itemView.bottom - 10).toFloat())
+            p.color = Color.RED
             c.drawRoundRect(rightButton, corners, corners, p)
             drawText("삭제", c, rightButton, p)
             buttonInstance = rightButton
@@ -130,9 +132,9 @@ class ItemTouchHelperCallback(listener: ItemTouchHelperListener) : ItemTouchHelp
     //버튼의 텍스트 그려주기
     private fun drawText(text: String, c: Canvas, button: RectF, p: Paint) {
         val textSize = 25f
-        p.setColor(Color.WHITE)
-        p.setAntiAlias(true)
-        p.setTextSize(textSize)
+        p.color = Color.WHITE
+        p.isAntiAlias = true
+        p.textSize = textSize
         val textWidth: Float = p.measureText(text)
         c.drawText(text, button.centerX() - textWidth / 2, button.centerY() + textSize / 2, p)
     }
@@ -145,34 +147,33 @@ class ItemTouchHelperCallback(listener: ItemTouchHelperListener) : ItemTouchHelp
         return super.convertToAbsoluteDirection(flags, layoutDirection)
     }
 
+    @SuppressLint("ClickableViewAccessibility")
     private fun setTouchListener(
         c: Canvas, recyclerView: RecyclerView,
         viewHolder: RecyclerView.ViewHolder,
         dX: Float, dY: Float, actionState: Int,
         isCurrentlyActive: Boolean,
     ) {
-        recyclerView.setOnTouchListener(object : View.OnTouchListener {
-            override fun onTouch(v: View?, event: MotionEvent): Boolean {
-                swipeBack =
-                    event.action == MotionEvent.ACTION_CANCEL || event.action == MotionEvent.ACTION_UP
-                if (swipeBack) {
-                    if (dX < -buttonWidth) buttonsShowedState =
-                        ButtonsState.RIGHT_VISIBLE else if (dX > buttonWidth) buttonsShowedState =
-                        ButtonsState.LEFT_VISIBLE
-                    if (buttonsShowedState != ButtonsState.GONE) {
-                        setTouchDownListener(c,
-                            recyclerView,
-                            viewHolder,
-                            dX,
-                            dY,
-                            actionState,
-                            isCurrentlyActive)
-                        setItemsClickable(recyclerView, false)
-                    }
+        recyclerView.setOnTouchListener { v, event ->
+            swipeBack =
+                event.action == MotionEvent.ACTION_CANCEL || event.action == MotionEvent.ACTION_UP
+            if (swipeBack) {
+                if (dX < -buttonWidth) buttonsShowedState =
+                    ButtonsState.RIGHT_VISIBLE else if (dX > buttonWidth) buttonsShowedState =
+                    ButtonsState.LEFT_VISIBLE
+                if (buttonsShowedState != ButtonsState.GONE) {
+                    setTouchDownListener(c,
+                        recyclerView,
+                        viewHolder,
+                        dX,
+                        dY,
+                        actionState,
+                        isCurrentlyActive)
+                    setItemsClickable(recyclerView, false)
                 }
-                return false
             }
-        })
+            false
+        }
     }
 
     private fun setTouchDownListener(
@@ -180,20 +181,18 @@ class ItemTouchHelperCallback(listener: ItemTouchHelperListener) : ItemTouchHelp
         viewHolder: RecyclerView.ViewHolder, dX: Float, dY: Float,
         actionState: Int, isCurrentlyActive: Boolean,
     ) {
-        recyclerView.setOnTouchListener(object : View.OnTouchListener {
-            override fun onTouch(v: View?, event: MotionEvent): Boolean {
-                if (event.action == MotionEvent.ACTION_DOWN) {
-                    setTouchUpListener(c,
-                        recyclerView,
-                        viewHolder,
-                        dX,
-                        dY,
-                        actionState,
-                        isCurrentlyActive)
-                }
-                return false
+        recyclerView.setOnTouchListener { _, event ->
+            if (event.action == MotionEvent.ACTION_DOWN) {
+                setTouchUpListener(c,
+                    recyclerView,
+                    viewHolder,
+                    dX,
+                    dY,
+                    actionState,
+                    isCurrentlyActive)
             }
-        })
+            false
+        }
     }
 
     private fun setTouchUpListener(
