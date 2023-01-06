@@ -20,7 +20,8 @@ import com.example.expirationdateapp.databinding.FragmentHomeBinding
 
 
 //class HomeFragment : Fragment(), DeleteItemClick{
-class HomeFragment : Fragment(), DeleteItemClick, ItemTouchHelperListener{
+class HomeFragment : Fragment(), DeleteItemClick{
+    val TAG = "HomeFragment"
     private lateinit var binding: FragmentHomeBinding
     lateinit var model: MainViewModel
     private val listener = this
@@ -78,13 +79,19 @@ class HomeFragment : Fragment(), DeleteItemClick, ItemTouchHelperListener{
     override fun takeItemCall(ItemName: String){
         model.takeItem(ItemName)
     }
+
+    /**swipe*/
     override fun onItemMove(from_position: Int, to_position: Int): Boolean{
         return true
     }
     override fun onItemSwipe(position: Int){
 
     }
+    @RequiresApi(Build.VERSION_CODES.O)
     override fun onLeftClick(position: Int, viewHolder: RecyclerView.ViewHolder?){
+        // 뷰홀더와 position으로 name
+        Log.d(TAG,"position $position")
+//        model.deleteItem(position)
     }
     override fun onRightClick(position: Int, viewHolder: RecyclerView.ViewHolder?){
     }

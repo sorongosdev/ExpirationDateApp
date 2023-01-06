@@ -14,7 +14,7 @@
         <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
-<!--            &lt;!&ndash;삭제 view&ndash;&gt;-->
+            <!--삭제 view-->
 <!--            <androidx.constraintlayout.widget.ConstraintLayout-->
 <!--                android:id="@+id/erase_item_view"-->
 <!--                android:layout_width="match_parent"-->

@@ -17,7 +17,7 @@ internal enum class ButtonsState {
     GONE, LEFT_VISIBLE, RIGHT_VISIBLE
 }
 
-class ItemTouchHelperCallback(private var listener: ItemTouchHelperListener) : ItemTouchHelper.Callback() {
+class ItemTouchHelperCallback(private var listener: DeleteItemClick) : ItemTouchHelper.Callback() {
     private var swipeBack = false
     private var buttonsShowedState = ButtonsState.GONE
     private var buttonInstance: RectF? = null
@@ -93,10 +93,10 @@ class ItemTouchHelperCallback(private var listener: ItemTouchHelperListener) : I
         }
         currentItemViewHolder = viewHolder
 
-        //버튼을 그려주는 함수
         drawButtons(c, currentItemViewHolder)
     }
-
+    
+    /**버튼을 그려주는 함수*/
     private fun drawButtons(c: Canvas, viewHolder: RecyclerView.ViewHolder?) {
         val buttonWidthWithOutPadding = buttonWidth - 10
         val corners = 5f
@@ -128,7 +128,7 @@ class ItemTouchHelperCallback(private var listener: ItemTouchHelperListener) : I
             buttonInstance = rightButton
         }
     }
-
+    //homeFragment로 itemview의 itemname 넘겨주기
     //버튼의 텍스트 그려주기
     private fun drawText(text: String, c: Canvas, button: RectF, p: Paint) {
         val textSize = 25f
@@ -176,6 +176,7 @@ class ItemTouchHelperCallback(private var listener: ItemTouchHelperListener) : I
         }
     }
 
+    @SuppressLint("ClickableViewAccessibility")
     private fun setTouchDownListener(
         c: Canvas, recyclerView: RecyclerView,
         viewHolder: RecyclerView.ViewHolder, dX: Float, dY: Float,
@@ -195,6 +196,7 @@ class ItemTouchHelperCallback(private var listener: ItemTouchHelperListener) : I
         }
     }
 
+    @SuppressLint("ClickableViewAccessibility")
     private fun setTouchUpListener(
         c: Canvas, recyclerView: RecyclerView,
         viewHolder: RecyclerView.ViewHolder, dX: Float, dY: Float,
@@ -209,11 +211,7 @@ class ItemTouchHelperCallback(private var listener: ItemTouchHelperListener) : I
                     dY,
                     actionState,
                     isCurrentlyActive)
-                recyclerView.setOnTouchListener(object : View.OnTouchListener {
-                    override fun onTouch(v: View?, event: MotionEvent): Boolean {
-                        return false
-                    }
-                })
+                recyclerView.setOnTouchListener { v, event -> false }
                 setItemsClickable(recyclerView, true)
                 swipeBack = false
                 if (listener != null && buttonInstance != null && buttonInstance!!.contains(event.x,
