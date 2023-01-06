@@ -13,6 +13,7 @@ import androidx.annotation.RequiresApi
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
+import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.expirationdateapp.MyFirebaseMessagingService
 import com.example.expirationdateapp.R
@@ -25,6 +26,8 @@ class HomeFragment : Fragment(), DeleteItemClick{
     private lateinit var binding: FragmentHomeBinding
     lateinit var model: MainViewModel
     private val listener = this
+    val swipeHelper = SwipeHelper()
+    val itemTouchHelper = ItemTouchHelper(swipeHelper)
 
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
@@ -36,6 +39,7 @@ class HomeFragment : Fragment(), DeleteItemClick{
         binding.rvList.apply{
             layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
             adapter = ListAdapter(emptyList(),listener)
+            itemTouchHelper.attachToRecyclerView(binding.rvList)
         }
 
         /**viewmodel*/
