@@ -42,23 +42,23 @@ class ListAdapter (var itemList: List<DocumentSnapshot>, listener: DeleteItemCli
         else{
             holder.dDay.text = "D" + dDay.toString()
         }
-        /**삭제버튼*/
-        holder.btnDelete.setOnClickListener {
-            mCallback.deleteItemCall(holder.name.text as String)
-        }
-        /**장바구니 버튼*/
-        holder.btnTake.setOnClickListener {
-            mCallback.takeItemCall(holder.name.text as String)
-        }
+//        /**삭제버튼*/
+//        holder.btnDelete.setOnClickListener {
+//            mCallback.deleteItemCall(holder.name.text as String)
+//        }
+//        /**장바구니 버튼*/
+//        holder.btnTake.setOnClickListener {
+//            mCallback.takeItemCall(holder.name.text as String)
+//        }
     }
     private val mCallback = listener
 
-    class ViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
-        val name: TextView = itemView.findViewById(R.id.search_name)
-        val useby: TextView = itemView.findViewById(R.id.search_useby)
-        val dDay: TextView = itemView.findViewById(R.id.dDay)
-        val btnDelete: Button = itemView.findViewById(R.id.btn_delete_item)
-        val btnTake: Button = itemView.findViewById(R.id.btn_take_item)
+    class ViewHolder(view: View): RecyclerView.ViewHolder(view) {
+        val name: TextView = view.findViewById(R.id.search_name)
+        val useby: TextView = view.findViewById(R.id.search_useby)
+        val dDay: TextView = view.findViewById(R.id.dDay)
+//        val btnDelete: Button = view.findViewById(R.id.btn_delete_item)
+//        val btnTake: Button = view.findViewById(R.id.btn_take_item)
     }
 
     fun setData(new : List<DocumentSnapshot>){

@@ -70,15 +70,15 @@ class HomeFragment : Fragment(), DeleteItemClick{
         return binding.root
     }
 
-    @RequiresApi(Build.VERSION_CODES.O)
-    override fun deleteItemCall(ItemName: String){
-        model.deleteItem(ItemName)
-    }
-
-    @RequiresApi(Build.VERSION_CODES.O)
-    override fun takeItemCall(ItemName: String){
-        model.takeItem(ItemName)
-    }
+//    @RequiresApi(Build.VERSION_CODES.O)
+//    override fun deleteItemCall(ItemName: String){
+//        model.deleteItem(ItemName)
+//    }
+//
+//    @RequiresApi(Build.VERSION_CODES.O)
+//    override fun takeItemCall(ItemName: String){
+//        model.takeItem(ItemName)
+//    }
 
     /**swipe*/
     override fun onItemMove(from_position: Int, to_position: Int): Boolean{
@@ -89,10 +89,14 @@ class HomeFragment : Fragment(), DeleteItemClick{
     }
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onLeftClick(position: Int, viewHolder: RecyclerView.ViewHolder?){
+        val itemName = model.liveItemListData.value?.get(position)?.id
+        if (itemName != null) model.takeItem(itemName)
+    }
+    @RequiresApi(Build.VERSION_CODES.O)
+    override fun onRightClick(position: Int, viewHolder: RecyclerView.ViewHolder?){
         // 뷰홀더와 position으로 name
         Log.d(TAG,"position $position")
-//        model.deleteItem(position)
-    }
-    override fun onRightClick(position: Int, viewHolder: RecyclerView.ViewHolder?){
+        val itemName = model.liveItemListData.value?.get(position)?.id
+        if (itemName != null) model.deleteItem(itemName)
     }
 }

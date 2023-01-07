@@ -176,6 +176,7 @@ class ItemTouchHelperCallback(private var listener: DeleteItemClick) : ItemTouch
         }
     }
 
+    /**만들어진 버튼을 눌렀을 때*/
     @SuppressLint("ClickableViewAccessibility")
     private fun setTouchDownListener(
         c: Canvas, recyclerView: RecyclerView,
@@ -195,39 +196,41 @@ class ItemTouchHelperCallback(private var listener: DeleteItemClick) : ItemTouch
             false
         }
     }
-
+    
+    /**손을 뗐을 때*/
     @SuppressLint("ClickableViewAccessibility")
     private fun setTouchUpListener(
         c: Canvas, recyclerView: RecyclerView,
         viewHolder: RecyclerView.ViewHolder, dX: Float, dY: Float,
         actionState: Int, isCurrentlyActive: Boolean,
     ) {
-        recyclerView.setOnTouchListener(object : View.OnTouchListener {
-            override fun onTouch(v: View?, event: MotionEvent): Boolean {
-                super@ItemTouchHelperCallback.onChildDraw(c,
-                    recyclerView,
-                    viewHolder,
-                    0f,
-                    dY,
-                    actionState,
-                    isCurrentlyActive)
-                recyclerView.setOnTouchListener { v, event -> false }
-                setItemsClickable(recyclerView, true)
-                swipeBack = false
-                if (listener != null && buttonInstance != null && buttonInstance!!.contains(event.x,
-                        event.y)
-                ) {
-                    if (buttonsShowedState == ButtonsState.LEFT_VISIBLE) {
-                        listener.onLeftClick(viewHolder.adapterPosition, viewHolder)
-                    } else if (buttonsShowedState == ButtonsState.RIGHT_VISIBLE) {
-                        listener.onRightClick(viewHolder.adapterPosition, viewHolder)
-                    }
+        recyclerView.setOnTouchListener { v, event ->
+            super@ItemTouchHelperCallback.onChildDraw(c,
+                recyclerView,
+                viewHolder,
+                0f,
+                dY,
+                actionState,
+                isCurrentlyActive)
+
+            recyclerView.setOnTouchListener { v, event -> false }
+
+            setItemsClickable(recyclerView, true)
+            swipeBack = false
+
+            if (listener != null && buttonInstance != null && buttonInstance!!.contains(event.x,
+                    event.y)
+            ) {
+                if (buttonsShowedState == ButtonsState.LEFT_VISIBLE) {
+                    listener.onLeftClick(viewHolder.adapterPosition, viewHolder)
+                } else if (buttonsShowedState == ButtonsState.RIGHT_VISIBLE) {
+                    listener.onRightClick(viewHolder.adapterPosition, viewHolder)
                 }
-                buttonsShowedState = ButtonsState.GONE
-                currentItemViewHolder = null
-                return false
             }
-        })
+            buttonsShowedState = ButtonsState.GONE
+            currentItemViewHolder = null
+            false
+        }
     }
 
     private fun setItemsClickable(recyclerView: RecyclerView, isClickable: Boolean) {
