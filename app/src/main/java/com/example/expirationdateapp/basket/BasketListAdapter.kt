@@ -30,15 +30,15 @@ class BasketListAdapter(var basketList: List<BasketListLayout>, listener: Basket
 
         override fun onBindViewHolder(holder: ViewHolder, position: Int) {
             holder.name.text = basketList[position].itemName
-            holder.btnTakeOut.setOnClickListener {
-                mCallback.takeOutItemCall(holder.name.text.toString())
-            }
+//            holder.btnTakeOut.setOnClickListener {
+//                mCallback.takeOutItemCall(holder.name.text.toString())
+//            }
         }
         private val mCallback = listener
 
         class ViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
             val name: TextView = itemView.findViewById(R.id.basket_item_name)
-            val btnTakeOut: Button = itemView.findViewById(R.id.basket_btn_take_out)
+//            val btnTakeOut: Button = itemView.findViewById(R.id.basket_btn_take_out)
         }
 
         fun setData(new : List<BasketListLayout>){

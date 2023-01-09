@@ -29,6 +29,7 @@ class MainViewModel: ViewModel() {
     val liveBasketListData = MutableLiveData<List<BasketListLayout>>()
     lateinit var BasketList : MutableList<BasketListLayout> // can append
 
+    /**로그인 사용자 정보*/
 //    val player = db.collection(auth.uid.toString())
     val player = db.collection("player")
     lateinit var dataStr :String
