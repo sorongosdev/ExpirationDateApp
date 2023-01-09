@@ -56,7 +56,10 @@ class MainViewModel: ViewModel() {
                 }
                 if (snapshot != null) { // capture added
                     Log.d(TAG,"snapshot isEmpty : ${snapshot.isEmpty}") // 스냅샷의 변화의 유무
-                    if (snapshot.isEmpty) liveItemListData.value = emptyList()
+                    if (snapshot.isEmpty) {
+                        liveItemListData.value = emptyList()
+                        liveBasketListData.value = emptyList()
+                    }
                     else {
                         for (doc in snapshot) {
                             Log.d(TAG, "${snapshot.documents}")

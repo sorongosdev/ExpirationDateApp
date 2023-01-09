@@ -8,7 +8,9 @@
             #FFFFFF
         </item>
     </style>
-<!--    <style name="Theme" parent="@android:style/TextAppearance">-->
-<!--        <item name="android:textColor">@color/gray</item>-->
-<!--    </style>-->
+    <style name="datePicker" parent="Theme.AppCompat.Light.Dialog">
+        <item name="colorPrimary">@color/main_blue</item>
+<!--        <item name="colorPrimaryDark">@color/primary_dark</item>-->
+<!--        <item name="colorAccent">@color/primary</item>-->
+    </style>
 </resources>
