@@ -57,7 +57,7 @@ class ItemAdd : Fragment() {
             val aItemExpire = dayText.text.toString()
             val aItemDday = (sDateTime-eDateTime) / (24 * 60 * 60 * 1000)
 
-            model.addItem(aItemName,ListLayout(aItemName,aItemExpire,aItemDday))
+            model.addItem(aItemName,ListLayout(aItemName,sDate,aItemExpire,aItemDday))
             
             // 등록버튼 눌렀을 때
             findNavController().popBackStack()

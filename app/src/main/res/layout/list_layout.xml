@@ -34,9 +34,8 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
                     />
-
                 <TextView
-                    android:id="@+id/search_useby"
+                    android:id="@+id/home_register_date"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="22.XX.XX"
@@ -45,13 +44,23 @@
                     />
 
                 <TextView
+                    android:id="@+id/home_useby"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="22.XX.XX"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/home_register_date"
+                    />
+
+                <TextView
                     android:id="@+id/dDay"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
-                    android:gravity="right"
                     android:text="D-0"
                     android:textSize="30dp"
                     app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
                     />
 <!--                <Button-->
 <!--                    android:id="@+id/btn_take_item"-->
