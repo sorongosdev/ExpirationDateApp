@@ -18,6 +18,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.expirationdateapp.R
 import com.example.expirationdateapp.databinding.FragmentHomeBinding
+import com.google.firebase.firestore.DocumentSnapshot
 
 
 //class HomeFragment : Fragment(), DeleteItemClick{
@@ -94,9 +95,14 @@ class HomeFragment : Fragment(), DeleteItemClick{
     /**삭제*/
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onRightClick(position: Int, viewHolder: RecyclerView.ViewHolder?){
-        val itemName = model.liveItemListData.value?.get(position)?.id
+
+        /**store temp*/
+        val temp : DocumentSnapshot = model.liveItemListData.value!![position]
+
+        /**delete temp*/
+        val itemName = temp.id
         if (itemName != null) model.deleteItem(itemName)
 
-        model.cancelAction(requireView())
+        model.cancelAction(requireView(), temp)
     }
 }

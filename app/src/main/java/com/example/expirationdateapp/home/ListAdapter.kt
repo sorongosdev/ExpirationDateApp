@@ -28,7 +28,6 @@ class ListAdapter (var itemList: List<DocumentSnapshot>, listener: DeleteItemCli
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        Log.d(TAG,"position : $position")
         holder.name.text = itemList[position].getString("name")
         holder.useby.text = itemList[position].getString("useby")
         /***/

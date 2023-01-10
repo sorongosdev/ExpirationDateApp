@@ -19,6 +19,7 @@ import java.text.SimpleDateFormat
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
 import java.util.*
+import java.util.Objects.isNull
 
 @RequiresApi(Build.VERSION_CODES.O)
 class MainViewModel: ViewModel() {
@@ -154,11 +155,24 @@ class MainViewModel: ViewModel() {
         return lst
     }
 
-    fun cancelAction(view:View){
+    fun cancelAction(view: View, temp: DocumentSnapshot){
         /**실행 취소 토스트*/
         val snackbar = Snackbar.make(view,"아이템을 삭제합니다.",Snackbar.LENGTH_INDEFINITE)
         snackbar.setAction("실행취소") {
             snackbar.dismiss()
+            /**undo*/
+            Log.d("cancelAction", "dDay isNull => ${temp["dday"]}")
+            Log.d("cancelAction", "take isNull => ${isNull(temp["take"])}")
+
+            addItem(temp["name"].toString(),
+                ListLayout(
+                    temp["name"].toString(),
+                    temp["register"].toString(),
+                    temp["useby"].toString(),
+                    temp["dday"].toString().toLong(), // null
+                    temp["take"].toString().toBoolean()
+                )
+            )
         }
         snackbar.show()
     }
