@@ -4,17 +4,14 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         xmlns:app="http://schemas.android.com/apk/res-auto"
-        app:strokeWidth="10dp"
-        app:strokeColor="@color/main_blue"
         app:cardCornerRadius="10dp"
         android:layout_marginBottom="10dp"
         android:layout_marginStart="10dp"
         android:layout_marginEnd="10dp"
         android:layout_marginTop="5dp"
+        android:id="@+id/home_card"
+        app:cardBackgroundColor="@color/main_blue"
         >
-        <FrameLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
 
             <!--아이템 view-->
             <androidx.constraintlayout.widget.ConstraintLayout
@@ -22,7 +19,6 @@
                 android:layout_height="wrap_content"
                 android:padding="10dp"
                 android:id="@+id/swipe_view"
-                android:background="@color/white"
                 >
 
                 <TextView
@@ -35,23 +31,37 @@
                     app:layout_constraintTop_toTopOf="parent"
                     />
                 <TextView
+                    android:id="@+id/home_register_label"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="등록일   "
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/search_name"
+                    />
+                <TextView
                     android:id="@+id/home_register_date"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="22.XX.XX"
-                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/home_register_label"
                     app:layout_constraintTop_toBottomOf="@+id/search_name"
                     />
-
+                <TextView
+                    android:id="@+id/home_useby_label"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="만료일   "
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/home_register_label"
+                    />
                 <TextView
                     android:id="@+id/home_useby"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="22.XX.XX"
-                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintStart_toStartOf="@id/home_register_date"
                     app:layout_constraintTop_toBottomOf="@+id/home_register_date"
                     />
-
                 <TextView
                     android:id="@+id/dDay"
                     android:layout_width="wrap_content"
@@ -62,24 +72,6 @@
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintBottom_toBottomOf="parent"
                     />
-<!--                <Button-->
-<!--                    android:id="@+id/btn_take_item"-->
-<!--                    android:layout_width="wrap_content"-->
-<!--                    android:layout_height="match_parent"-->
-<!--                    android:text="장바구니"-->
-<!--                    app:layout_constraintTop_toTopOf="parent"-->
-<!--                    app:layout_constraintEnd_toStartOf="@+id/btn_delete_item"-->
-<!--                    />-->
-<!--                <Button-->
-<!--                    android:id="@+id/btn_delete_item"-->
-<!--                    android:layout_width="wrap_content"-->
-<!--                    android:layout_height="match_parent"-->
-<!--                    android:text="삭제"-->
-<!--                    app:layout_constraintTop_toTopOf="parent"-->
-<!--                    app:layout_constraintEnd_toEndOf="parent"-->
-<!--                    />-->
-
             </androidx.constraintlayout.widget.ConstraintLayout>
-        </FrameLayout>
     </androidx.cardview.widget.CardView>
 </layout>

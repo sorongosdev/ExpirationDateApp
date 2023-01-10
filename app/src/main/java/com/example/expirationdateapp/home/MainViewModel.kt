@@ -136,6 +136,8 @@ class MainViewModel: ViewModel() {
         return ((sDateTime-eDateTime) / (24 * 60 * 60 * 1000))
     }
 
+    /***/
+
     /**DB의 useby에서 해당월과 같은 월인 monthFoodList를 가져옴*/
     fun getMonthFood(syyyyMM: String) : MutableList<CalFoodBox> {
 
