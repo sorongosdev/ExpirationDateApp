@@ -1,14 +1,16 @@
 package com.example.expirationdateapp.home
+
 import android.content.ContentValues.TAG
 import android.os.Build
 import android.util.Log
+import android.view.View
 import androidx.annotation.RequiresApi
-
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.example.expirationdateapp.basket.BasketListAdapter
+import com.example.expirationdateapp.R
 import com.example.expirationdateapp.basket.BasketListLayout
 import com.example.expirationdateapp.calender.CalFoodBox
+import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.*
@@ -23,7 +25,6 @@ class MainViewModel: ViewModel() {
     private val db = FirebaseFirestore.getInstance()
     lateinit var listenerBasic: ListenerRegistration
     val liveItemListData = MutableLiveData<List<DocumentSnapshot>>()
-//    val liveItemListData = MutableLiveData<List<ListLayout>>()
     private var auth : FirebaseAuth = Firebase.auth
 
     val liveBasketListData = MutableLiveData<List<BasketListLayout>>()
@@ -38,16 +39,16 @@ class MainViewModel: ViewModel() {
     var liveTodayData = MutableLiveData<String>()
 
     init {
-        getList()
+        getList("name")
         getTime()
         Log.d(TAG,"사용자 uid : ${auth.uid}")
     }
 
     /**snapshot read*/
-    private fun getList() {
+    fun getList(field: String) {
         BasketList = mutableListOf<BasketListLayout>()
 
-        listenerBasic = player.orderBy("name")
+        listenerBasic = player.orderBy(field)
             .addSnapshotListener { snapshot, e ->
                 BasketList.clear()
 
@@ -87,8 +88,6 @@ class MainViewModel: ViewModel() {
             .addOnFailureListener { exception ->
                 Log.d("MainViewModel", "Error delete documents: $exception")    // 실패할 경우
             }
-        // 리스트에 마지막 아이템 삭제 하고 나서는 라이브데이터가 안 바뀐다?
-
     }
 
     /**디데이를 업데이트 해주는 함수*/
@@ -115,6 +114,7 @@ class MainViewModel: ViewModel() {
         player.document(itemName).update("take", false)
     }
 
+    /**날짜의 일의 자리 숫자 앞에 0 붙여서 반환하는 함수*/
     fun Date2String(date: Int): String{
         if (date < 10) return "0" + date.toString()
 
@@ -152,5 +152,14 @@ class MainViewModel: ViewModel() {
 
         }
         return lst
+    }
+
+    fun cancelAction(view:View){
+        /**실행 취소 토스트*/
+        val snackbar = Snackbar.make(view,"아이템을 삭제합니다.",Snackbar.LENGTH_INDEFINITE)
+        snackbar.setAction("실행취소") {
+            snackbar.dismiss()
+        }
+        snackbar.show()
     }
 }

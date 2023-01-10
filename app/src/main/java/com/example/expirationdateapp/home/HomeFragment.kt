@@ -8,6 +8,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.RadioGroup
 import androidx.annotation.RequiresApi
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
@@ -37,11 +38,7 @@ class HomeFragment : Fragment(), DeleteItemClick{
         binding.rvList.apply{
             layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
             adapter = ListAdapter(emptyList(),listener)
-//            val swipeHelper = SwipeHelper()
-//            val itemTouchHelper = ItemTouchHelper(swipeHelper)
-//            itemTouchHelper.attachToRecyclerView(binding.rvList)
 
-//            val itemTouchHelperCallback = ItemTouchHelperCallback(listener)
             val itemTouchHelperCallback = ItemTouchHelperCallback(listener)
             helper = ItemTouchHelper(itemTouchHelperCallback)
             helper.attachToRecyclerView(binding.rvList)
@@ -67,18 +64,19 @@ class HomeFragment : Fragment(), DeleteItemClick{
             binding.tvToken.text = it
         }
 
+        /**정렬 방식*/
+        binding.orderAbc.setOnClickListener{
+            Log.d(TAG,"가나다순")
+            model.getList("name")
+
+        }
+        binding.orderUseby.setOnClickListener{
+            Log.d(TAG,"만료일순")
+            model.getList("useby")
+        }
+
         return binding.root
     }
-
-//    @RequiresApi(Build.VERSION_CODES.O)
-//    override fun deleteItemCall(ItemName: String){
-//        model.deleteItem(ItemName)
-//    }
-//
-//    @RequiresApi(Build.VERSION_CODES.O)
-//    override fun takeItemCall(ItemName: String){
-//        model.takeItem(ItemName)
-//    }
 
     /**swipe*/
     override fun onItemMove(from_position: Int, to_position: Int): Boolean{
@@ -87,16 +85,18 @@ class HomeFragment : Fragment(), DeleteItemClick{
     override fun onItemSwipe(position: Int){
 
     }
+    /**장바구니*/
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onLeftClick(position: Int, viewHolder: RecyclerView.ViewHolder?){
         val itemName = model.liveItemListData.value?.get(position)?.id
         if (itemName != null) model.takeItem(itemName)
     }
+    /**삭제*/
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onRightClick(position: Int, viewHolder: RecyclerView.ViewHolder?){
-        // 뷰홀더와 position으로 name
-        Log.d(TAG,"position $position")
         val itemName = model.liveItemListData.value?.get(position)?.id
         if (itemName != null) model.deleteItem(itemName)
+
+        model.cancelAction(requireView())
     }
 }
