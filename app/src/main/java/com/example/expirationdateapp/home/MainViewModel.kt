@@ -44,7 +44,7 @@ class MainViewModel: ViewModel() {
     }
 
     /**snapshot read*/
-    fun getList() {
+    private fun getList() {
         BasketList = mutableListOf<BasketListLayout>()
 
         listenerBasic = player.orderBy("name")
