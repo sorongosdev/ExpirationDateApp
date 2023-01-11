@@ -78,21 +78,14 @@ class ListAdapter (var itemList: List<DocumentSnapshot>, listener: DeleteItemCli
     fun setColor(card: CardView, dDay: Double, gap: Double, context: Context){
         val par:Double = dDay/gap
         Log.d(TAG,"dDay => $dDay / gap => $gap / dDay/gap => ${dDay/gap}")
-        if(par <= 1.0) {
-            Log.d(TAG,"set sky")
-            card.setCardBackgroundColor(context.getColor(R.color.main_sky))
-        }
-        if(par <= 0.66) {
-            Log.d(TAG,"set green")
-            card.setCardBackgroundColor(context.getColor(R.color.main_green))
-        }
-        if(par <= 0.33){
-            Log.d(TAG,"set yellow")
-            card.setCardBackgroundColor(context.getColor(R.color.main_yellow))
-        }
-        if (par <= 0) {
-            card.setCardBackgroundColor(context.getColor(R.color.main_red))
-        }
+        if(par <= 1.0 && par > 0.5) card.setCardBackgroundColor(context.getColor(R.color.main_sky))
+
+        else if(par <= 0.5 && par > 0.3) card.setCardBackgroundColor(context.getColor(R.color.main_green))
+
+        else if(par <= 0.3 && par > 0) card.setCardBackgroundColor(context.getColor(R.color.main_yellow))
+
+        else if (par <= 0) card.setCardBackgroundColor(context.getColor(R.color.main_red))
+
     }
 
 

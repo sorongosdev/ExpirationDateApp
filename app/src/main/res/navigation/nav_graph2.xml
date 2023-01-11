@@ -8,13 +8,6 @@
     >
 
     <fragment
-        android:label="fragment_register"
-        android:id="@+id/registerFragment"
-        android:name="com.example.expirationdateapp.login.RegisterFragment"
-        tools:layout="@layout/fragment_register"
-        />
-
-    <fragment
         android:label="fragment_home"
         android:id="@+id/homeFragment"
         android:name="com.example.expirationdateapp.home.HomeFragment"

@@ -15,19 +15,5 @@ class SplashActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivitySplashBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
-//        Handler(Looper.getMainLooper()).postDelayed({
-//
-////            val intent= Intent( this, NaviActivity::class.java)
-////            startActivity(intent)
-//        }, 500)
-//
     }
-//    fun moveHome(user: FirebaseUser?){
-//        if(user != null){
-////            findNavController().navigate(R.id.action_loginFragment_to_homeFragment)
-//            val intent= Intent( this, NaviActivity::class.java)
-//            startActivity(intent)
-//        }
-//    }
 }

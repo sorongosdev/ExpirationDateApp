@@ -56,4 +56,5 @@ class NaviActivity : AppCompatActivity() {
             model.dataStr = dataStr
         }
     }
+
 }
