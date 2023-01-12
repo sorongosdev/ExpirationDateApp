@@ -38,6 +38,7 @@ class CalenderFragment : Fragment() {
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
+        var TAG = "CalendarFragment"
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_calender,container,false)
         binding.lifecycleOwner =viewLifecycleOwner
 
@@ -52,18 +53,19 @@ class CalenderFragment : Fragment() {
 //            selectedDate.format(DateTimeFormatter.ofPattern("yyyyMM"))
 //        )
 
-        var calendar : MaterialCalendarView = binding.calendarView
         var dates = ArrayList<CalendarDay>()
 //        var date = Calendar.getInstance()
 //        date.set(2023,1,12)
 
         // 달력에 표시할 날짜 dayList에 넣기 - 오늘날짜
         dates.add(CalendarDay.today())
+        dates.add(CalendarDay.from(2023,1,14))
 
-        binding.calendarView.addDecorator(EventDecorator(Collections.singleton(CalendarDay.today())))
-
-        //글자 표시를 하루하루
-
+//        binding.calendarView.addDecorator(EventDecorator(Collections.singleton(CalendarDay.today())))
+//        val eventDecorator = dat
+        val colors : List<Int> = listOf(Color.BLACK, Color.BLUE)
+        val event = EventDecorator(colors,dates)
+        binding.calendarView.addDecorator(event)
 
         // 글자표시는 하루하루
 //        var date_for_text = ArrayList<CalendarDay>()
