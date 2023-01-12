@@ -6,7 +6,6 @@ plugins {
 
 android {
     compileSdk 33
-
     defaultConfig {
         applicationId "com.example.expirationdateapp"
         minSdk 23
@@ -16,6 +15,7 @@ android {
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
+
 
     buildTypes {
         release {
@@ -36,10 +36,10 @@ android {
 }
 
 dependencies {
-
     implementation 'androidx.core:core-ktx:1.9.0'
     implementation 'androidx.appcompat:appcompat:1.5.1'
-    implementation 'com.google.android.material:material:1.7.0'
+    def calver = '2.0.1'
+    implementation "com.github.prolificinteractive:material-calendarview:$calver"
     implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
 
     //navigation graph

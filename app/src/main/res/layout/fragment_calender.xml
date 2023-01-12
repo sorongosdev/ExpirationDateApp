@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout>
-    <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    <FrameLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -40,74 +41,82 @@
                     />
 
             </LinearLayout>
-
-            <LinearLayout
+            <com.prolificinteractive.materialcalendarview.MaterialCalendarView
+                xmlns:app="http://schemas.android.com/apk/res-auto"
+                android:id="@+id/calendarView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
-                <TextView
-                    android:text="일"
-                    android:id="@+id/SUN"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:textAlignment="center"
-                    />
-                <TextView
-                    android:text="월"
-                    android:id="@+id/MON"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:textAlignment="center"
-                    />
-                <TextView
-                    android:text="화"
-                    android:id="@+id/TUE"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:textAlignment="center"
-                    />
-                <TextView
-                    android:text="수"
-                    android:id="@+id/WED"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:textAlignment="center"
-                    />
-                <TextView
-                    android:text="목"
-                    android:id="@+id/THU"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:textAlignment="center"
-                    />
-                <TextView
-                    android:text="금"
-                    android:id="@+id/FRI"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:textAlignment="center"
-                    />
-                <TextView
-                    android:text="토"
-                    android:id="@+id/SAT"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:textAlignment="center"
-                    />
+                app:mcv_showOtherDates="all"
+                app:mcv_selectionColor="@color/main_blue"
+                />
 
-            </LinearLayout>
+<!--            <LinearLayout-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:orientation="horizontal">-->
+<!--                <TextView-->
+<!--                    android:text="일"-->
+<!--                    android:id="@+id/SUN"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="match_parent"-->
+<!--                    android:layout_weight="1"-->
+<!--                    android:textAlignment="center"-->
+<!--                    />-->
+<!--                <TextView-->
+<!--                    android:text="월"-->
+<!--                    android:id="@+id/MON"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="match_parent"-->
+<!--                    android:layout_weight="1"-->
+<!--                    android:textAlignment="center"-->
+<!--                    />-->
+<!--                <TextView-->
+<!--                    android:text="화"-->
+<!--                    android:id="@+id/TUE"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="match_parent"-->
+<!--                    android:layout_weight="1"-->
+<!--                    android:textAlignment="center"-->
+<!--                    />-->
+<!--                <TextView-->
+<!--                    android:text="수"-->
+<!--                    android:id="@+id/WED"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="match_parent"-->
+<!--                    android:layout_weight="1"-->
+<!--                    android:textAlignment="center"-->
+<!--                    />-->
+<!--                <TextView-->
+<!--                    android:text="목"-->
+<!--                    android:id="@+id/THU"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="match_parent"-->
+<!--                    android:layout_weight="1"-->
+<!--                    android:textAlignment="center"-->
+<!--                    />-->
+<!--                <TextView-->
+<!--                    android:text="금"-->
+<!--                    android:id="@+id/FRI"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="match_parent"-->
+<!--                    android:layout_weight="1"-->
+<!--                    android:textAlignment="center"-->
+<!--                    />-->
+<!--                <TextView-->
+<!--                    android:text="토"-->
+<!--                    android:id="@+id/SAT"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="match_parent"-->
+<!--                    android:layout_weight="1"-->
+<!--                    android:textAlignment="center"-->
+<!--                    />-->
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/cal_rv"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent" />
+<!--            </LinearLayout>-->
+
+<!--            <androidx.recyclerview.widget.RecyclerView-->
+<!--                android:id="@+id/cal_rv"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="match_parent" />-->
         </LinearLayout>
 
     </FrameLayout>

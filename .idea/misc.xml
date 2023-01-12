@@ -3,11 +3,14 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/Admin/AndroidStudioProjects/ExpirationDateApp/app/library/src/main/res/drawable/mcv_action_next.xml" value="0.1075" />
+        <entry key="..\:/Users/Admin/AndroidStudioProjects/ExpirationDateApp/app/library/src/main/res/drawable/mcv_action_previous.xml" value="0.1075" />
         <entry key="..\:/Users/Admin/AndroidStudioProjects/ExpirationDateApp/app/src/main/res/drawable/btn_circle.xml" value="0.173" />
         <entry key="..\:/Users/Admin/AndroidStudioProjects/ExpirationDateApp/app/src/main/res/drawable/calender_box.xml" value="0.163" />
         <entry key="..\:/Users/Admin/AndroidStudioProjects/ExpirationDateApp/app/src/main/res/drawable/ic_baseline_arrow_back_24.xml" value="0.1285" />
         <entry key="..\:/Users/Admin/AndroidStudioProjects/ExpirationDateApp/app/src/main/res/drawable/ic_baseline_arrow_forward_24.xml" value="0.1285" />
         <entry key="..\:/Users/Admin/AndroidStudioProjects/ExpirationDateApp/app/src/main/res/drawable/ic_home.xml" value="0.1205" />
+        <entry key="..\:/Users/Admin/AndroidStudioProjects/ExpirationDateApp/app/src/main/res/drawable/ic_launcher_background.xml" value="0.159" />
         <entry key="..\:/Users/Admin/AndroidStudioProjects/ExpirationDateApp/app/src/main/res/drawable/ic_search.xml" value="0.1575" />
         <entry key="..\:/Users/Admin/AndroidStudioProjects/ExpirationDateApp/app/src/main/res/drawable/loading.xml" value="0.164" />
         <entry key="..\:/Users/Admin/AndroidStudioProjects/ExpirationDateApp/app/src/main/res/drawable/logo.xml" value="0.164" />
@@ -21,7 +24,7 @@
         <entry key="..\:/Users/Admin/AndroidStudioProjects/ExpirationDateApp/app/src/main/res/layout/cal_list_layout.xml" value="0.72" />
         <entry key="..\:/Users/Admin/AndroidStudioProjects/ExpirationDateApp/app/src/main/res/layout/calendar_cell.xml" value="0.2039333048311244" />
         <entry key="..\:/Users/Admin/AndroidStudioProjects/ExpirationDateApp/app/src/main/res/layout/fragment_basket.xml" value="0.2" />
-        <entry key="..\:/Users/Admin/AndroidStudioProjects/ExpirationDateApp/app/src/main/res/layout/fragment_calender.xml" value="0.4" />
+        <entry key="..\:/Users/Admin/AndroidStudioProjects/ExpirationDateApp/app/src/main/res/layout/fragment_calender.xml" value="0.264" />
         <entry key="..\:/Users/Admin/AndroidStudioProjects/ExpirationDateApp/app/src/main/res/layout/fragment_home.xml" value="0.176" />
         <entry key="..\:/Users/Admin/AndroidStudioProjects/ExpirationDateApp/app/src/main/res/layout/fragment_item_add.xml" value="0.264" />
         <entry key="..\:/Users/Admin/AndroidStudioProjects/ExpirationDateApp/app/src/main/res/layout/fragment_login.xml" value="0.136" />
