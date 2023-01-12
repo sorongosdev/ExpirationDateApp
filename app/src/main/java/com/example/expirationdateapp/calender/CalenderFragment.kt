@@ -1,5 +1,6 @@
 package com.example.expirationdateapp.calender
 
+import android.graphics.Color
 import android.os.Build
 import android.os.Bundle
 import android.util.Log
@@ -17,8 +18,11 @@ import com.example.expirationdateapp.basket.BasketListAdapter
 import com.example.expirationdateapp.databinding.FragmentCalenderBinding
 import com.example.expirationdateapp.home.ListAdapter
 import com.example.expirationdateapp.home.MainViewModel
+import com.google.firebase.database.collection.LLRBNode
+import com.prolificinteractive.materialcalendarview.CalendarDay
+import com.prolificinteractive.materialcalendarview.MaterialCalendarView
 import java.text.SimpleDateFormat
-import java.time.LocalDate
+import org.threeten.bp.LocalDate
 import java.time.YearMonth
 import java.time.format.DateTimeFormatter
 import java.util.*
@@ -40,68 +44,33 @@ class CalenderFragment : Fragment() {
         /**뷰모델 가져오기*/
         model = ViewModelProvider(requireActivity()).get(MainViewModel::class.java)
 
-//        /**오늘 날짜 가져오기*/
-//        selectedDate = LocalDate.now()
-//
-//        /**오늘 날짜로 포맷에 맞게 텍스트 업데이트*/
-//        setMonthView()
-//
-//        /**이전 달*/
-//        binding.calBtnPre.setOnClickListener{
-//            selectedDate = selectedDate.minusMonths(1)
-//            setMonthView()
-//        }
-//        /**다음 달*/
-//        binding.calBtnNext.setOnClickListener{
-//            selectedDate = selectedDate.plusMonths(1)
-//            setMonthView()
-//        }
+        /**오늘 날짜 가져오기*/
+        selectedDate = LocalDate.now()
 
-        /**리사이클러뷰와 어댑터*/
-//        binding.calRv.apply{
-//            layoutManager = GridLayoutManager(context, 7, LinearLayoutManager.VERTICAL, false)
-//        }
+//        /**당일월과 같은 음식 가져오기*/
+//        model.getMonthFood( // monthFoodList<CalFoodBox>
+//            selectedDate.format(DateTimeFormatter.ofPattern("yyyyMM"))
+//        )
+
+        var calendar : MaterialCalendarView = binding.calendarView
+        var dates = ArrayList<CalendarDay>()
+//        var date = Calendar.getInstance()
+//        date.set(2023,1,12)
+
+        // 달력에 표시할 날짜 dayList에 넣기 - 오늘날짜
+        dates.add(CalendarDay.today())
+
+        binding.calendarView.addDecorator(EventDecorator(Collections.singleton(CalendarDay.today())))
+
+        //글자 표시를 하루하루
+
+
+        // 글자표시는 하루하루
+//        var date_for_text = ArrayList<CalendarDay>()
+//        date_for_text.add(day)
+//        calendar.addDecorator(TextDecorator)
 
         return binding.root
     }
-//
-//    @RequiresApi(Build.VERSION_CODES.O)
-//    /**캘린더 뷰 세팅*/
-//    fun setMonthView(){
-//        binding.monthYearText.text = selectedDate.format(DateTimeFormatter.ofPattern("MM월 yyyy"))
-//        dayList = daysInMonthArray(selectedDate)
-//        binding.calRv.adapter = CalListAdapter(
-//            dayList, // dayList : List<CalListLayout>
-//            model.getMonthFood( // monthFoodList<CalFoodBox>
-//                selectedDate.format(DateTimeFormatter.ofPattern("yyyyMM"))
-//            )
-//        )
-//
-//    }
-//
-//    @RequiresApi(Build.VERSION_CODES.O)
-//    fun daysInMonthArray(date : LocalDate) : MutableList<CalListLayout>{
-//        dayList = mutableListOf<CalListLayout>()
-//        var yearMonth = YearMonth.from(date)
-//
-//        /**해당월 마지막 날짜*/
-//        val lastDay = yearMonth.lengthOfMonth()
-//        /**해당월 첫 날짜*/
-//        val firstDay = selectedDate.withDayOfMonth(1)
-//        /**첫째 날 요일 가져오기*/
-//        val dayOfWeek : Int = firstDay.dayOfWeek.value
-//
-//        for(i:Int in 1..42){
-//            if(i <= dayOfWeek || i > lastDay + dayOfWeek){
-//                dayList.add(CalListLayout(""))
-//            }
-//            else{
-//                /**캘린더 날짜 업데이트*/
-//                dayList.add(CalListLayout((i-dayOfWeek).toString()))
-//                /**해당 날짜의 이벤트 탐색*/
-//            }
-//        }
-//        return dayList
-//    }
 
 }

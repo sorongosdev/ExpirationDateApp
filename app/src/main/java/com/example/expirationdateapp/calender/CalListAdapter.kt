@@ -53,7 +53,7 @@ class CalListAdapter(var dayList: List<CalListLayout>,var monthFoodList: List<Ca
             dayFoodList = mutableListOf<CalFoodBox>()
             for(i in monthFoodList){
                 if(i.FoodDate.substring(6,8) == dayText){
-                    dayFoodList.add(CalFoodBox(i.FoodName,i.FoodName))
+                    dayFoodList.add(CalFoodBox(i.FoodName,i.FoodDate))
                 }
             }
         }
